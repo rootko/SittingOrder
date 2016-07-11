@@ -1,0 +1,48 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:paddingBottom="@dimen/activity_vertical_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin"
+    android:paddingRight="@dimen/activity_horizontal_margin"
+    android:paddingTop="@dimen/activity_vertical_margin"
+    android:orientation="vertical"
+    app:layout_behavior="@string/appbar_scrolling_view_behavior"
+    tools:context="sk.halmi.sittingorder.MainActivity"
+    tools:showIn="@layout/activity_main">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
+        <EditText
+            android:id="@+id/e_room_no"
+            android:layout_width="0px"
+            android:layout_weight="1"
+            android:layout_height="@dimen/row_height"
+            android:hint="@string/room_number"
+            />
+        <Button
+            android:id="@+id/btn_people"
+            android:layout_width="0px"
+            android:layout_weight="1"
+            android:layout_height="@dimen/row_height"
+            android:text="@string/get_people"/>
+    </LinearLayout>
+
+    <android.support.v7.widget.RecyclerView android:id="@+id/result_list"
+            xmlns:android="http://schemas.android.com/apk/res/android"
+            xmlns:app="http://schemas.android.com/apk/res-auto"
+            xmlns:tools="http://schemas.android.com/tools"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            app:layoutManager="LinearLayoutManager"
+            tools:context="sk.halmi.sittingorder.MainActivity"
+            tools:listitem="@layout/result_card"
+            android:scrollbars="vertical"/>
+
+
+</LinearLayout>

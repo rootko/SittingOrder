@@ -1,0 +1,10 @@
+<resources>
+    <string name="app_name">SittingOrder</string>
+    <string name="action_settings">Settings</string>
+    <string name="get_floors">Get floors</string>
+    <string name="get_rooms">Get Rooms</string>
+    <string name="get_people">Get people</string>
+    <string name="building_number">Building number</string>
+    <string name="floor_number">Floor number</string>
+    <string name="room_number">Room number</string>
+</resources>
