@@ -1,0 +1,28 @@
+<RelativeLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:paddingBottom="@dimen/activity_horizontal_margin"
+    android:paddingLeft="@dimen/activity_horizontal_margin">
+
+    <ImageButton
+        android:layout_width="@dimen/row_height"
+        android:layout_height="@dimen/row_height"
+        android:id="@+id/btn_orange"
+        android:background="@drawable/roundedbutton_green"
+        android:src="@drawable/abc_btn_radio_to_on_mtrl_015"
+        android:layout_alignParentTop="true"
+        android:layout_toRightOf="@+id/btn_green"
+        android:layout_toEndOf="@+id/btn_green"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"/>
+
+    <ImageButton
+        android:layout_width="@dimen/row_height"
+        android:layout_height="@dimen/row_height"
+        android:id="@+id/btn_green"
+        android:background="@drawable/roundedbutton_orgg"
+        android:src="@android:drawable/stat_notify_error"
+        android:layout_alignParentTop="true"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true" />
+</RelativeLayout>

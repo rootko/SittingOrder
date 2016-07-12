@@ -1,0 +1,49 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
+
+    <RelativeLayout
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentLeft="true"
+        android:layout_alignParentStart="true"
+        android:id="@+id/relativeLayout1"
+        android:layout_gravity="center">
+        <EditText
+            android:id="@+id/name"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:hint="Meno"
+            android:textSize="@dimen/text_velky"
+            android:inputType="textPersonName"
+            android:layout_weight="1">
+        </EditText>
+    </RelativeLayout>
+
+    <EditText
+        android:id="@+id/priezvisko"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="textPersonName"
+        android:hint="Priezvisko"
+        android:textSize="@dimen/text_velky"
+        android:layout_weight="1"
+        android:layout_gravity="center"
+        android:layout_toRightOf="@+id/relativeLayout1"
+        android:layout_toEndOf="@+id/relativeLayout1"
+        android:layout_marginRight="@dimen/activity_horizontal_margin"
+        android:layout_marginLeft="@dimen/activity_horizontal_margin"
+        >
+    </EditText>
+
+    <ImageButton
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_gravity="center"
+        android:src="@android:drawable/ic_menu_delete"
+        android:background="@android:color/white"
+        android:id="@+id/btndelete"
+        />
+
+</LinearLayout>
