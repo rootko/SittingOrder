@@ -1,0 +1,27 @@
+<resources>
+    <string name="app_name">SeatingOrder1</string>
+    <string name="action_settings">Settings</string>
+    <string name="titlesearchroom">Vyhladaj miestnost</string>
+
+    <string-array name="budovaArray">
+        <item>Juzna Trieda 6</item>
+        <item>Juzna Trieda 8</item>
+    </string-array>
+
+    <string-array name="poschodieArray6">
+        <item>1.</item>
+        <item>2.</item>
+        <item>3.</item>
+        <item>4.</item>
+        <item>5.</item>
+    </string-array>
+
+    <string-array name="poschodieArray8">
+        <item>1.</item>
+        <item>2.</item>
+        <item>3.</item>
+        <item>4.</item>
+        <item>5.</item>
+        <item>6.</item>
+    </string-array>
+</resources>
