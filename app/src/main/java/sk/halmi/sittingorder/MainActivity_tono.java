@@ -74,12 +74,12 @@ public class MainActivity_tono extends AppCompatActivity {
 
     private void vytvorMiestnosti() {
         // Construct the data source
-        final ArrayList<Miestnost> arrayOfUsers = new ArrayList<Miestnost>();
+        final ArrayList<Miestnost_tono> arrayOfUsers = new ArrayList<Miestnost_tono>();
         for (int i = 0; i < 10; i++) {
-            arrayOfUsers.add(new Miestnost("Miestnost:" + i, "Poschodie:" + i));
+            arrayOfUsers.add(new Miestnost_tono("Miestnost:" + i, "Poschodie:" + i));
         }
 // Create the adapter to convert the array to views
-        MiestnostAdapter adapter = new MiestnostAdapter(this, arrayOfUsers);
+        MiestnostAdapter_tono adapter = new MiestnostAdapter_tono(this, arrayOfUsers);
 
         zoznamMiestnosti.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override

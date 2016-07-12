@@ -25,7 +25,7 @@ public class VyhladajZamestnanca extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_vyhladajZamestnanca);
+        setContentView(R.layout.activity_editujmiestnost);
         meno = (EditText)findViewById(R.id.ETmeno);
         priezvisko = (EditText)findViewById(R.id.ETpriezvisko);
         vysledok = (TextView)findViewById(R.id.TVvysledok);
