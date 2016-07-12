@@ -12,18 +12,18 @@ import java.util.ArrayList;
 /**
  * Created by FPTSlovakia on 7/12/2016.
  */
-public class MiestnostAdapter_tono extends ArrayAdapter<Miestnost>{
-    public MiestnostAdapter_tono(Context context, ArrayList<Miestnost> miestnosti){
+public class MiestnostAdapter_tono extends ArrayAdapter<Miestnost_tono>{
+    public MiestnostAdapter_tono(Context context, ArrayList<Miestnost_tono> miestnosti){
         super(context, 0, miestnosti);
     }
 
     @Override
     public View getView(int position, View convertView, ViewGroup parent) {
         // Get the data item for this position
-        Miestnost miestnost = getItem(position);
+        Miestnost_tono miestnost = getItem(position);
         // Check if an existing view is being reused, otherwise inflate the view
         if (convertView == null) {
-            convertView = LayoutInflater.from(getContext()).inflate(R.layout.miestnost_layout, parent, false);
+            convertView = LayoutInflater.from(getContext()).inflate(R.layout.miestnost_layout_tono, parent, false);
         }
         // Lookup view for data population
         TextView tvMiestnost = (TextView) convertView.findViewById(R.id.cisloMiestnosti);

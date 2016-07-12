@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <string name="app_name">ZasadaciPoriadok</string>
+
     <string name="TV_textMeno">Meno</string>
     <string name="TV_textPriezvisko">Priezvisko</string>
     <string name="enter">potvrd</string>
