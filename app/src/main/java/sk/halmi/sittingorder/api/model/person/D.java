@@ -1,5 +1,5 @@
 
-package sk.halmi.sittingorder.api.model;
+package sk.halmi.sittingorder.api.model.person;
 
 import java.util.ArrayList;
 import java.util.List;

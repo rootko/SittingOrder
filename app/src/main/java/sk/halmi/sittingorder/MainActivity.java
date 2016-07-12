@@ -12,8 +12,6 @@ import android.view.MenuItem;
 import android.widget.Button;
 import android.widget.EditText;
 
-import java.util.List;
-
 import butterknife.Bind;
 import butterknife.ButterKnife;
 import butterknife.OnClick;
@@ -22,11 +20,17 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import sk.halmi.sittingorder.api.BackendAPI;
 import sk.halmi.sittingorder.api.SittingOrder;
-import sk.halmi.sittingorder.api.model.D;
-import sk.halmi.sittingorder.api.model.PersonSet;
-import sk.halmi.sittingorder.api.model.Result;
+import sk.halmi.sittingorder.api.model.person.PersonSet;
+import sk.halmi.sittingorder.api.model.person.Result;
+import sk.halmi.sittingorder.api.model.room.RoomSet;
 
 public class MainActivity extends AppCompatActivity {
+	@Bind(R.id.e_building_no)
+	EditText eBuildingNumber;
+
+	@Bind(R.id.e_floor_no)
+	EditText eFloorNumber;
+
 	@Bind(R.id.e_room_no)
 	EditText eRoomNumber;
 
@@ -72,12 +76,14 @@ public class MainActivity extends AppCompatActivity {
 	}
 
 	@OnClick(R.id.btn_people)
-	public void floorClick(Button button) {
+	public void peopleClick(Button button) {
 		// Create a very simple REST adapter which points the GitHub API endpoint.
 		SittingOrder client = BackendAPI.createService(SittingOrder.class);
+		String buildingFilter = "IdBuilding eq '" + eBuildingNumber.getText().toString().toUpperCase() + "'";
+		String roomFilter = "IdRoom eq '"+eRoomNumber.getText().toString()+"'";
 
 		// Fetch and print a list of the contributors to this library.
-		Call<PersonSet> call = client.getPersons("IdRoom eq '"+eRoomNumber.getText().toString()+"'", "json");
+		Call<PersonSet> call = client.getPersons(buildingFilter + " and " + roomFilter, "json");
 		call.enqueue(new Callback<PersonSet>() {
 			@Override
 			public void onResponse(Call<PersonSet> call, Response<PersonSet> response) {
@@ -100,6 +106,42 @@ public class MainActivity extends AppCompatActivity {
 
 			@Override
 			public void onFailure(Call<PersonSet> call, Throwable t) {
+				// something went completely south (like no internet connection)
+				Log.d("Cube", "onFailure");
+			}
+		});
+	}
+	@OnClick(R.id.btn_rooms)
+	public void roomClick(Button button) {
+		// Create a very simple REST adapter which points the GitHub API endpoint.
+		SittingOrder client = BackendAPI.createService(SittingOrder.class);
+
+		// Fetch and print a list of the contributors to this library.
+		String buildingFilter = "IdBuilding eq '" + eBuildingNumber.getText().toString().toLowerCase() + "'";
+		String floorFilter = "IdFloor eq '" + eFloorNumber.getText().toString() + "'";
+		Call<RoomSet> call = client.getRooms(buildingFilter + " and " + floorFilter, "json");
+		call.enqueue(new Callback<RoomSet>() {
+			@Override
+			public void onResponse(Call<RoomSet> call, Response<RoomSet> response) {
+				Log.d("Cube", "onResponse");
+				if (response.isSuccessful()) {
+					RoomSet personSet = response.body();
+					for (sk.halmi.sittingorder.api.model.room.Result result : personSet.getD().getResults()) {
+						Log.d("Cube", result.getIdBuilding() + " " + result.getIdFloor() + " " + result.getIdRoom());
+					}
+//					List<D.Cube> cubes = response.body().getCube().getCube().get(0).getCube();
+//					setupRecyclerView(cubes);
+//					for (Envelope.Cube cube : cubes) {
+//						Log.d("Cube", cube.toString());
+//					}
+				} else {
+					// error response, no access to resource?
+					Log.d("Cube", "--------- didn't work ---------" + response.message());
+				}
+			}
+
+			@Override
+			public void onFailure(Call<RoomSet> call, Throwable t) {
 				// something went completely south (like no internet connection)
 				Log.d("Cube", "onFailure");
 			}

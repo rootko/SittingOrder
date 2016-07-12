@@ -4,7 +4,7 @@
     <string name="get_floors">Get floors</string>
     <string name="get_rooms">Get Rooms</string>
     <string name="get_people">Get people</string>
-    <string name="building_number">Building number</string>
-    <string name="floor_number">Floor number</string>
-    <string name="room_number">Room number</string>
+    <string name="building_number">Building</string>
+    <string name="floor_number">Floor</string>
+    <string name="room_number">Room</string>
 </resources>
