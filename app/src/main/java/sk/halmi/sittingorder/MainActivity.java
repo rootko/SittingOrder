@@ -135,7 +135,7 @@ public class MainActivity extends AppCompatActivity {
 
 		SittingOrder client = BackendAPI.createService(SittingOrder.class);
 
-		String buildingFilter = "IdBuilding eq '" + eBuildingNumber.getText().toString().toLowerCase() + "'";
+		String buildingFilter = "IdBuilding eq '" + eBuildingNumber.getText().toString().toUpperCase() + "'";
 		String floorFilter = "IdFloor eq '" + eFloorNumber.getText().toString() + "'";
 		Call<RoomSet> call = client.getRooms(buildingFilter + " and " + floorFilter, "json");
 		call.enqueue(new Callback<RoomSet>() {
