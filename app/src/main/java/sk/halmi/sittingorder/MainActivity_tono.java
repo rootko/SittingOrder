@@ -1,5 +1,6 @@
 package sk.halmi.sittingorder;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -28,7 +29,7 @@ public class MainActivity_tono extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.activity_main_tono);
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
         getSupportActionBar().setTitle(R.string.titlesearchroom);
@@ -85,9 +86,10 @@ public class MainActivity_tono extends AppCompatActivity {
         MiestnostAdapter_tono adapter = new MiestnostAdapter_tono(this, arrayOfUsers);
 
         zoznamMiestnosti.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(getBaseContext(), arrayOfUsers.get(position).toString(), Toast.LENGTH_SHORT).show();
+                startActivity(new Intent(MainActivity_tono.this, Editujmiestnost.class));
             }
         });
         // Attach the adapter to a ListView
