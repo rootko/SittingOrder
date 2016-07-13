@@ -16,6 +16,8 @@ import android.widget.Toast;
 import java.util.ArrayList;
 import java.util.List;
 
+import sk.halmi.sittingorder.api.model.RowItemEdituj;
+
 public class Editujmiestnost extends AppCompatActivity {
 
     private List<RowItemEdituj> zoznammien = new ArrayList<RowItemEdituj>();

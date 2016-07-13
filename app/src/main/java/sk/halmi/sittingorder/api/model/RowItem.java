@@ -1,4 +1,4 @@
-package sk.halmi.sittingorder;
+package sk.halmi.sittingorder.api.model;
 
 /**
  * Created by Lea user on 12/07/2016.

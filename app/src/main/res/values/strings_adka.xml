@@ -7,5 +7,5 @@
     <string name="clear">zmaz</string>
     <string name="TV_textHladajPodla">Hladaj podla</string>
     <string name="TV_textVysledok">Vysledok</string>
-    <string name="TV_id">ID zamestnanca</string>
+    <string name="title_search_person">Vyhladaj zamestnanca</string>
 </resources>
