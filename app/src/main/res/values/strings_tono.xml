@@ -1,11 +1,18 @@
 <resources>
     <string name="titlesearchroom">Vyhladaj miestnost</string>
 
+    <!--BUDOVY ARRAYS ARRAY VALUES-->
     <string-array name="budovaArray">
         <item>Juzna Trieda 6</item>
         <item>Juzna Trieda 8</item>
     </string-array>
 
+    <string-array name="budovaArrayValues">
+        <item>JT6</item>
+        <item>JT8</item>
+    </string-array>
+
+    <!--POSCHODIA BUDOVY JT6-->
     <string-array name="poschodieArray6">
         <item>1.</item>
         <item>2.</item>
@@ -14,6 +21,7 @@
         <item>5.</item>
     </string-array>
 
+    <!--POSCHODIA BUDOVY JT8-->
     <string-array name="poschodieArray8">
         <item>1.</item>
         <item>2.</item>
@@ -22,4 +30,5 @@
         <item>5.</item>
         <item>6.</item>
     </string-array>
+
 </resources>
