@@ -20,8 +20,15 @@ import java.util.ArrayList;
 import java.util.List;
 ;import butterknife.Bind;
 import butterknife.ButterKnife;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import sk.halmi.sittingorder.api.BackendAPI;
+import sk.halmi.sittingorder.api.SittingOrder;
 import sk.halmi.sittingorder.api.model.RowItem;
 import sk.halmi.sittingorder.api.model.RowItemEdituj;
+import sk.halmi.sittingorder.api.model.person.PersonSet;
+import sk.halmi.sittingorder.api.model.person.Result;
 
 public class Vysledkyvyhladavania extends AppCompatActivity {
 
@@ -30,6 +37,8 @@ public class Vysledkyvyhladavania extends AppCompatActivity {
     @Bind(R.id.list_wrapper)
     LinearLayout wrapper;
 
+    String name2Search, surname2Search, idEmp2Search;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -37,21 +46,80 @@ public class Vysledkyvyhladavania extends AppCompatActivity {
         ButterKnife.bind(this);
 
         Intent intent = getIntent();
-        String name2Search = intent.getStringExtra("name");
-        String surname2Search = intent.getStringExtra("surname");
-        String idEmp2Search = intent.getStringExtra("idEmp");
+        name2Search = intent.getStringExtra("name");
+        surname2Search = intent.getStringExtra("surname");
+        idEmp2Search = intent.getStringExtra("idEmp");
 
         Toast.makeText(Vysledkyvyhladavania.this, name2Search + ": " + surname2Search + " " + idEmp2Search, Toast.LENGTH_SHORT).show();
 
+////        listView=(ListView)findViewById(R.id.listView);
+////        //------------------------------ NAPLNANIE LISTVIEWU ----------------------------------------------------
+//        for (int i = 0; i < 26; i++) {
+//            vyhladavanie.add(new RowItem("i", "Karol", "Kamo", "8", "4", "409"));
+//        }
+//        populateList();
+////        populateOnClickList();
+    }
 
+    @Override
+    protected void onStart() {
+        super.onStart();
+        getDataFromBackend();
+    }
 
-//        listView=(ListView)findViewById(R.id.listView);
-//        //------------------------------ NAPLNANIE LISTVIEWU ----------------------------------------------------
-        for (int i = 0; i < 26; i++) {
-            vyhladavanie.add(new RowItem("i", "Karol", "Kamo", "8", "4", "409"));
+    private void getDataFromBackend() {
+        String filter = "";
+        //http://54.169.86.172:8000/sap/opu/odata/SAP/ZSUMMER_SRV/PersonSet?$format=json&$filter=IdPerson eq 42 and FirstName eq 'Rudolf' and LastName eq 'Seman'
+        if (null != name2Search && !"".equals(name2Search.toString())) {
+            filter += "FirstName eq '"+name2Search+"' ";
         }
-        populateList();
-//        populateOnClickList();
+        if (null != surname2Search && !"".equals(surname2Search.toString())) {
+            filter += "and LastName eq '"+surname2Search+"' ";
+        }
+        if (null != idEmp2Search && !"".equals(idEmp2Search.toString())) {
+            filter += "and IdPerson eq '"+idEmp2Search+"' ";
+        }
+
+        //if filter starts with and - remove it
+        if (filter.startsWith("and")) {
+            filter = filter.substring(3);
+        }
+
+        // Create a very simple REST adapter which points the GitHub API endpoint.
+        SittingOrder client = BackendAPI.createService(SittingOrder.class);
+
+        // Fetch the response via retrofit
+        Call<PersonSet> call = client.getPersons(filter, "json");
+        call.enqueue(new Callback<PersonSet>() {
+            @Override
+            public void onResponse(Call<PersonSet> call, Response<PersonSet> response) {
+                Log.d("OkHttp", "onResponse");
+                if (response.isSuccessful()) {
+                    //get the results - in this case a PersonSet
+                    PersonSet personSet = response.body();
+                    vyhladavanie = new ArrayList<RowItem>();
+                    //get throught the results
+                    for (Result result : personSet.getD().getResults()) {
+                        //log each one
+                        Log.d("OkHttp", result.getFirstName() + " " + result.getLastName());
+                        //and add it to the data set
+                        vyhladavanie.add(new RowItem(result.getIdPerson()+"", result.getFirstName(), result.getLastName(), result.getIdBuilding(), result.getIdFloor(), result.getIdRoom()));
+                    }
+                    //when all items are processed, refresh the recycler view
+                    populateList();
+                } else {
+                    // error response, no access to resource?
+                    Log.d("OkHttp", "--------- didn't work ---------" + response.message());
+                }
+            }
+
+            @Override
+            public void onFailure(Call<PersonSet> call, Throwable t) {
+                // something went completely south (like no internet connection)
+                Log.d("OkHttp", "onFailure");
+            }
+        });
+
 
 
     }

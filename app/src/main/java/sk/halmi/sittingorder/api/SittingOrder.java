@@ -20,5 +20,7 @@ public interface SittingOrder {
 	Call<RoomSet> getRooms(
 			@Query("$filter") String nameFilter,
 			@Query("$format") String value
+
 	);
+
 }
