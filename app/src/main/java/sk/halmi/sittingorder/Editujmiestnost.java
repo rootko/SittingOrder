@@ -42,7 +42,7 @@ public class Editujmiestnost extends AppCompatActivity {
         findViewById(R.id.b_test).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(Editujmiestnost.this, "clicked", Toast.LENGTH_SHORT).show();
+                Toast.makeText(Editujmiestnost.this, "save", Toast.LENGTH_SHORT).show();
             }
         });
 
@@ -180,7 +180,6 @@ public class Editujmiestnost extends AppCompatActivity {
 
                     }
                     else {
-                        Toast.makeText(Editujmiestnost.this, "Vyhodime " + menicko, Toast.LENGTH_SHORT).show();
                         //vyhadzovaniee ludi
                         zoznammien.remove(position);
                         zoznammien.add(new RowItemEdituj("","",""));

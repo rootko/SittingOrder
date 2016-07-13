@@ -66,6 +66,7 @@
         android:src="@drawable/userdelete"
         android:background="@android:color/white"
         android:id="@+id/btndelete"
+        android:tint="@color/colorAccent"
         />
 
 </LinearLayout>
