@@ -6,7 +6,19 @@
     android:paddingBottom="@dimen/activity_horizontal_margin"
     android:paddingLeft="@dimen/activity_horizontal_margin">
 
+    <ImageView
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:src="@drawable/user"
+        android:id="@+id/image"/>
 
+
+
+<RelativeLayout
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content"
+    android:layout_toRightOf="@+id/image"
+    android:layout_toEndOf="@+id/image">
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -55,9 +67,7 @@
         android:layout_marginLeft="@dimen/activity_horizontal_margin"
         >
     </TextView>
-
-
-
+    
     <RelativeLayout
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
@@ -102,6 +112,7 @@
 
         android:layout_below="@+id/relativeLayout1">
     </TextView>
+</RelativeLayout>
 
 
 </RelativeLayout>
