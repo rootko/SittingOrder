@@ -77,7 +77,7 @@ public class Vysledkyvyhladavania extends AppCompatActivity {
             filter += "and LastName eq '"+surname2Search+"' ";
         }
         if (null != idEmp2Search && !"".equals(idEmp2Search.toString())) {
-            filter += "and IdPerson eq '"+idEmp2Search+"' ";
+            filter += "and IdPerson eq "+idEmp2Search+" ";
         }
 
         //if filter starts with and - remove it
@@ -125,7 +125,7 @@ public class Vysledkyvyhladavania extends AppCompatActivity {
     }
 
     private void populateList() {
-
+		wrapper.removeAllViews();
         LayoutInflater layoutInflater = LayoutInflater.from(Vysledkyvyhladavania.this);
         Integer idenfier = 0;
         for (RowItem item : vyhladavanie) {

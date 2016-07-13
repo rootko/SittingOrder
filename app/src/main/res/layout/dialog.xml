@@ -9,7 +9,7 @@
         android:layout_height="wrap_content">
         <TextView
             android:id="@+id/TVmeno"
-            android:layout_width="wrap_content"
+            android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:text="@string/TV_textMeno" />
         <EditText
@@ -25,7 +25,7 @@
         android:layout_height="wrap_content">
         <TextView
             android:id="@+id/TVpriezvisko"
-            android:layout_width="wrap_content"
+            android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:text="@string/TV_textPriezvisko" />
         <EditText
@@ -40,7 +40,7 @@
         android:layout_height="wrap_content">
         <TextView
             android:id="@+id/TVid"
-            android:layout_width="wrap_content"
+            android:layout_width="100dp"
             android:layout_height="wrap_content"
             android:text="@string/TV_id" />
         <EditText
