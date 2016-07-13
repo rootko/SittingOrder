@@ -24,7 +24,8 @@
         android:layout_weight="0.4"
         android:layout_height="wrap_content"
         android:text="BUDOVA:"
-        android:id="@+id/budova" />
+        android:id="@+id/budova"
+        android:textStyle="bold" />
 
     <Spinner
         android:layout_width="0px"
@@ -43,7 +44,8 @@
         android:layout_weight="0.4"
         android:layout_height="wrap_content"
         android:text="POSCHODIE:"
-        android:id="@+id/poschodie" />
+        android:id="@+id/poschodie"
+        android:textStyle="bold" />
     <Spinner
         android:layout_width="0px"
         android:layout_weight="0.6"
@@ -59,11 +61,13 @@
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceSmall"
         android:text="MIESTNOSTI:"
-        android:id="@+id/MiestnostiText" />
+        android:id="@+id/MiestnostiText"
+        android:textStyle="italic" />
 
     <ListView
         android:layout_width="match_parent"
         android:layout_height="match_parent"
         android:id="@+id/zoznamMiestnosti"
-        android:layout_gravity="center_horizontal" />
+        android:layout_gravity="center_horizontal"
+        />
 </LinearLayout>

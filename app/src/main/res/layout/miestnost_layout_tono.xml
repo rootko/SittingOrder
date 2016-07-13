@@ -6,11 +6,21 @@
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/cisloMiestnosti"/>
+        android:id="@+id/cisloMiestnosti"
+        android:text="405"
+        android:textStyle="bold"
+        android:textAppearance="@android:style/TextAppearance.Large"
+        android:textColor="@color/colorAccent"
+        />
 
     <TextView
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:id="@+id/cisloPoschodia"/>
+        android:id="@+id/cisloPoschodia"
+        android:textStyle="bold"
+        android:textAppearance="@android:style/TextAppearance.Medium"
+        android:text="4"
+        android:paddingLeft="15dp"
+        />
 
 </LinearLayout>

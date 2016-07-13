@@ -78,7 +78,7 @@ public class MainActivity_tono extends AppCompatActivity {
                 int index = budovaSpinner.getSelectedItemPosition();
                 int indexPoschodie = poschodieSpinnner.getSelectedItemPosition();
 
-                Toast.makeText(MainActivity_tono.this, buildingIds[index], Toast.LENGTH_SHORT).show();
+                // Toast.makeText(MainActivity_tono.this, buildingIds[index], Toast.LENGTH_SHORT).show();
 
                 String buildingFilter = "IdBuilding eq '" + buildingIds[index] + "'";
                 String floorFilter = "IdFloor eq '" + poschodieIds [indexPoschodie] + "'";
