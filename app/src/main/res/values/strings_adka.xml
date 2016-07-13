@@ -8,4 +8,5 @@
     <string name="TV_textHladajPodla">Hladaj podla</string>
     <string name="TV_textVysledok">Vysledok</string>
     <string name="title_search_person">Vyhladaj zamestnanca</string>
+    <string name="TV_id">ID</string>
 </resources>
