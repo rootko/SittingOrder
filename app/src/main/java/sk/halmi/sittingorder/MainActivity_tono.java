@@ -224,7 +224,7 @@ public class MainActivity_tono extends AppCompatActivity {
                 })
                 .setNegativeButton(R.string.clear, new DialogInterface.OnClickListener() {
                     public void onClick(DialogInterface dialog, int id) {
-                        Log.d("Dialog", "nic ste nezadali");
+                        Log.d("Dialog", "Boxes are empty");
                     }
                 });
 

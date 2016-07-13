@@ -36,7 +36,7 @@
             android:id="@+id/name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:hint="Meno"
+            android:hint="Name"
             android:textSize="@dimen/text_velky"
             android:inputType="textPersonName"
             android:layout_weight="1">
@@ -48,7 +48,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:inputType="textPersonName"
-        android:hint="Priezvisko"
+        android:hint="Surname"
         android:textSize="@dimen/text_velky"
         android:layout_weight="1"
         android:layout_gravity="center"

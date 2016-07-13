@@ -23,7 +23,7 @@
         android:layout_width="0px"
         android:layout_weight="0.4"
         android:layout_height="wrap_content"
-        android:text="BUDOVA:"
+        android:text="BUILDING:"
         android:id="@+id/budova"
         android:textStyle="bold" />
 
@@ -43,7 +43,7 @@
         android:layout_width="0px"
         android:layout_weight="0.4"
         android:layout_height="wrap_content"
-        android:text="POSCHODIE:"
+        android:text="FLOOR:"
         android:id="@+id/poschodie"
         android:textStyle="bold" />
     <Spinner
@@ -60,7 +60,7 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:textAppearance="?android:attr/textAppearanceSmall"
-        android:text="MIESTNOSTI:"
+        android:text="ROOMS:"
         android:id="@+id/MiestnostiText"
         android:textStyle="italic" />
 

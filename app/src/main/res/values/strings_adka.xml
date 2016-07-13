@@ -1,13 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<resources>
 
-    <string name="TV_textMeno">Meno</string>
-    <string name="TV_textPriezvisko">Priezvisko</string>
-    <string name="enter">potvrd</string>
-    <string name="clear">zmaz</string>
-    <string name="TV_textHladajPodla">Hladaj podla</string>
-    <string name="TV_textVysledok">Vysledok</string>
-    <string name="title_search_person">Vyhladaj zamestnanca</string>
+<resources>
+    <string name="TV_textMeno">Name</string>
+    <string name="TV_textPriezvisko">Surname</string>
+    <string name="enter">OK</string>
+    <string name="clear">Clear</string>
+    <string name="TV_textHladajPodla">Search by</string>
+    <string name="TV_textVysledok">Show all employees</string>
+    <string name="title_search_person">Find employee</string>
     <string name="TV_id">ID</string>
     <item name="enter" type="id" />
 </resources>
