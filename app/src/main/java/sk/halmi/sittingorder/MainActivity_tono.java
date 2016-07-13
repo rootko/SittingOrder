@@ -176,10 +176,10 @@ public class MainActivity_tono extends AppCompatActivity {
 				startActivity(new Intent(MainActivity_tono.this, Editujmiestnost.class));
 				break;
 
-			case R.id.action_search_person:
-				startActivity(new Intent(MainActivity_tono.this, VyhladajZamestnanca.class));
-				break;
-
+//			case R.id.action_search_person:
+//				startActivity(new Intent(MainActivity_tono.this, VyhladajZamestnanca.class));
+//				break;
+//
 			case R.id.action_search_results:
 				startActivity(new Intent(MainActivity_tono.this, Vysledkyvyhladavania.class));
 				break;
