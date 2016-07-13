@@ -10,10 +10,8 @@ import android.widget.ArrayAdapter;
 import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
-
 import java.util.ArrayList;
 import java.util.List;
-
 ;import sk.halmi.sittingorder.api.model.RowItem;
 
 public class Vysledkyvyhladavania extends Activity {
@@ -30,7 +28,7 @@ public class Vysledkyvyhladavania extends Activity {
 
         //------------------------------ NAPLNANIE LISTVIEWU ----------------------------------------------------
         for (int i=0;i<6;i++) {
-            vyhladavanie.add(new RowItem(i+"Karol", "Kamo", "8", "4", "409"));
+            vyhladavanie.add(new RowItem("i","Karol", "Kamo", "8", "4", "409"));
         }
         populateList();
         populateOnClickList();
@@ -44,17 +42,17 @@ public class Vysledkyvyhladavania extends Activity {
     private void populateOnClickList()
     {
         listView.setOnItemClickListener(new AdapterView.OnItemClickListener()
-        {
-            @Override
-        public void onItemClick(AdapterView<?> parent, final View view, int position, long id)
-        {
-            int pos=position+1;
-            Toast.makeText(Vysledkyvyhladavania.this, Integer.toString(pos)+" Clicked", Toast.LENGTH_SHORT).show();
+                                        {
+                                            @Override
+                                            public void onItemClick(AdapterView<?> parent, final View view, int position, long id)
+                                            {
+                                                int pos=position+1;
+                                                Toast.makeText(Vysledkyvyhladavania.this, Integer.toString(pos)+" Clicked", Toast.LENGTH_SHORT).show();
 
-            startActivity(new Intent(Vysledkyvyhladavania.this,Editujmiestnost.class));
-        }
-        }
-    );
+                                                startActivity(new Intent(Vysledkyvyhladavania.this,Editujmiestnost.class));
+                                            }
+                                        }
+        );
     }
 
     public class ListViewAdapterRowItem extends ArrayAdapter<RowItem> {
@@ -70,6 +68,9 @@ public class Vysledkyvyhladavania extends Activity {
             }
 
             RowItem rowItem = vyhladavanie.get(position);
+
+            TextView txt_idecko = (TextView) itemView.findViewById(R.id.idecko);
+            txt_idecko.setText(rowItem.getIdecko());
 
             TextView txt_name = (TextView) itemView.findViewById(R.id.name);
             txt_name.setText(rowItem.getMeno());

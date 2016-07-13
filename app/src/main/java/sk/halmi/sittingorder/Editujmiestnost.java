@@ -44,15 +44,15 @@ public class Editujmiestnost extends AppCompatActivity {
         });
 
         // -------------------------- NAPLNANIE LISTVIEWU -----------------------------------------------
-        zoznammien.add(new RowItemEdituj("Karol", "Kamo"));
-        zoznammien.add(new RowItemEdituj("Julius", "Kamo"));
+        zoznammien.add(new RowItemEdituj("1","Karol", "Kamo"));
+        zoznammien.add(new RowItemEdituj("2","Julius", "Kamo"));
 
         // ---------------------------- KAPACITA -------------------------------------------------------
 
         int velikost=zoznammien.size();
         for (int j=0;j<10-velikost;j++)
         {
-            zoznammien.add(new RowItemEdituj("", ""));
+            zoznammien.add(new RowItemEdituj("","", ""));
         }
 
         populateList();
@@ -65,33 +65,26 @@ public class Editujmiestnost extends AppCompatActivity {
     //Kliknutie na floating button ULOZIT
     private void saveList()
     {
-       fab.setOnClickListener(new View.OnClickListener() {
+        fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 int velkost=zoznammien.size();
                 if (velkost!=0)
                 {
-                RowItemEdituj rowItemEdituj = zoznammien.get(velkost-1);
-
-                System.out.println("VELKOST "+velkost);
-
-                if (rowItemEdituj.getMeno().toString().equals(""))
-                {
-                    Toast.makeText(Editujmiestnost.this,"UKLADAM "+velkost+"-1" , Toast.LENGTH_LONG).show();
-                    for (int i=0;i<velkost-1;i++)
-                    {
-                        RowItemEdituj rowItemEdituj_save = zoznammien.get(i);
-                    }
-                }
-                else
-                {
-                    Toast.makeText(Editujmiestnost.this,"UKLADAM "+velkost , Toast.LENGTH_LONG).show();
                     for (int i=0;i<velkost;i++)
                     {
-                        RowItemEdituj rowItemEdituj_save = zoznammien.get(i);
+                        RowItemEdituj rowItemEdituj = zoznammien.get(i);
+                        if(rowItemEdituj.getMeno().equals(""))
+                        {
+
+                        }
+                        else
+                        {
+                            RowItemEdituj rowItemEdituj_save = zoznammien.get(i);
+                            // posielanie na ulozenie potom
+                        }
                     }
-                }
-            }}
+                }}
         });
     }
 
@@ -107,8 +100,8 @@ public class Editujmiestnost extends AppCompatActivity {
                                             @Override
                                             public void onItemClick(AdapterView<?> parent, final View view, int position, long id)
                                             {
-          int pos=position+1;
-          Toast.makeText(Editujmiestnost.this, Integer.toString(pos)+" Clicked", Toast.LENGTH_SHORT).show();}
+                                                int pos=position+1;
+                                                Toast.makeText(Editujmiestnost.this, Integer.toString(pos)+" Clicked", Toast.LENGTH_SHORT).show();}
                                         }
         );
     }
@@ -127,6 +120,9 @@ public class Editujmiestnost extends AppCompatActivity {
 
             RowItemEdituj rowItemEdituj = zoznammien.get(position);
 
+            EditText txt_idecko=(EditText)itemView.findViewById(R.id.idecko);
+            txt_idecko.setText(rowItemEdituj.getIdecko());
+
             final EditText txt_name = (EditText) itemView.findViewById(R.id.name);
             txt_name.setText(rowItemEdituj.getMeno());
 
@@ -138,11 +134,18 @@ public class Editujmiestnost extends AppCompatActivity {
             imageButton.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Toast.makeText(Editujmiestnost.this, "Vyhodime "+ menicko, Toast.LENGTH_SHORT).show();
 
-                    //vyhadzovaniee ludi
-                    zoznammien.remove(position);
-                    notifyDataSetChanged();
+                    if (menicko.equals(""))
+                    {
+
+                    }
+                    else {
+                        Toast.makeText(Editujmiestnost.this, "Vyhodime " + menicko, Toast.LENGTH_SHORT).show();
+                        //vyhadzovaniee ludi
+                        zoznammien.remove(position);
+                        zoznammien.add(new RowItemEdituj("","",""));
+                        notifyDataSetChanged();
+                    }
                 }
             });
 

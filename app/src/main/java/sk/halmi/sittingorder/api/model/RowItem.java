@@ -5,20 +5,24 @@ package sk.halmi.sittingorder.api.model;
  */
 public class RowItem {
 
+    String idecko;
     String meno;
     String priezvisko;
     String budova;
     String poschodie;
     String miestnost;
 
-    public RowItem(String meno, String priezvisko, String budova, String poschodie, String miestnost)
+    public RowItem(String idecko,String meno, String priezvisko, String budova, String poschodie, String miestnost)
     {
-      this.meno=meno;
-      this.priezvisko=priezvisko;
-      this.budova=budova;
-      this.poschodie=poschodie;
-      this.miestnost=miestnost;
+        this.idecko=idecko;
+        this.meno=meno;
+        this.priezvisko=priezvisko;
+        this.budova=budova;
+        this.poschodie=poschodie;
+        this.miestnost=miestnost;
     }
+
+    public String getIdecko() { return idecko; }
 
     public String getMeno() {
         return meno;
