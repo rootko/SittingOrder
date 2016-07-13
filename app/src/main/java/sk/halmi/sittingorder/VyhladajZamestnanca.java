@@ -11,6 +11,7 @@ public class VyhladajZamestnanca extends AppCompatActivity {
 
     EditText meno;
     EditText priezvisko;
+    EditText id;
     TextView vysledok;
 
 
@@ -19,9 +20,6 @@ public class VyhladajZamestnanca extends AppCompatActivity {
      * See https://g.co/AppIndexing/AndroidStudio for more information.
      */
 
-
-
-
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -29,6 +27,7 @@ public class VyhladajZamestnanca extends AppCompatActivity {
         meno = (EditText)findViewById(R.id.ETmeno);
         priezvisko = (EditText)findViewById(R.id.ETpriezvisko);
         vysledok = (TextView)findViewById(R.id.TVvysledok);
+        id = (EditText) findViewById(R.id.ETid);
 
         Button potvrd = (Button)findViewById(R.id.enter);
         potvrd.setOnClickListener(new View.OnClickListener() {
@@ -36,7 +35,8 @@ public class VyhladajZamestnanca extends AppCompatActivity {
             public void onClick(View view) {
                 String name= meno.getText().toString();
                 String surname = priezvisko.getText().toString();
-                vysledok.setText(name + " " + surname);
+                String idEmp = id.getText().toString();
+                vysledok.setText(name + " " + surname + " "+ idEmp);
             }
         });
 
