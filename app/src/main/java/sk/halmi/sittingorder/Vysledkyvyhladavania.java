@@ -4,6 +4,7 @@ import android.app.Activity;
 import android.content.Intent;
 import android.nfc.Tag;
 import android.os.Bundle;
+import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
@@ -22,7 +23,7 @@ import butterknife.ButterKnife;
 import sk.halmi.sittingorder.api.model.RowItem;
 import sk.halmi.sittingorder.api.model.RowItemEdituj;
 
-public class Vysledkyvyhladavania extends Activity {
+public class Vysledkyvyhladavania extends AppCompatActivity {
 
     private List<RowItem> vyhladavanie = new ArrayList<RowItem>();
     //    ListView listView;
@@ -34,6 +35,14 @@ public class Vysledkyvyhladavania extends Activity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_vysledkyvyhladavania);
         ButterKnife.bind(this);
+
+        Intent intent = getIntent();
+        String name2Search = intent.getStringExtra("name");
+        String surname2Search = intent.getStringExtra("surname");
+        String idEmp2Search = intent.getStringExtra("idEmp");
+
+        Toast.makeText(Vysledkyvyhladavania.this, name2Search + ": " + surname2Search + " " + idEmp2Search, Toast.LENGTH_SHORT).show();
+
 
 
 //        listView=(ListView)findViewById(R.id.listView);

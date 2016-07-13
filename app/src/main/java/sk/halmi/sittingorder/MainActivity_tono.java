@@ -1,23 +1,29 @@
 package sk.halmi.sittingorder;
 
+import android.content.DialogInterface;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
+import android.support.v7.app.AlertDialog;
 import android.support.v7.app.AppCompatActivity;
 import android.support.v7.widget.Toolbar;
 import android.util.Log;
+import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
 import java.util.ArrayList;
 
+import butterknife.Bind;
+import butterknife.ButterKnife;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
@@ -123,8 +129,9 @@ public class MainActivity_tono extends AppCompatActivity {
         fab.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-                        .setAction("Action", null).show();
+//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
+//                        .setAction("Action", null).show();
+                showSearchDialog();
             }
         });
         zoznamMiestnosti = (ListView) findViewById(R.id.zoznamMiestnosti);
@@ -180,4 +187,49 @@ public class MainActivity_tono extends AppCompatActivity {
 
         return super.onOptionsItemSelected(item);
     }
+
+    @Bind(R.id.ETmeno)
+    EditText meno;
+    @Bind(R.id.ETpriezvisko)
+    EditText priezvisko;
+    @Bind(R.id.ETid)
+    EditText id;
+
+    private void showSearchDialog() {
+        AlertDialog.Builder builder = new AlertDialog.Builder(MainActivity_tono.this);
+        // Get the layout inflater
+        LayoutInflater inflater = MainActivity_tono.this.getLayoutInflater();
+        final View itemView = inflater.inflate(R.layout.dialog, null);
+        ButterKnife.bind(this, itemView);
+
+        // Inflate and set the layout for the dialog
+        // Pass null as the parent view because its going in the dialog layout
+        builder.setTitle(R.string.TV_textHladajPodla)
+                .setView(itemView)
+                // Add action buttons
+                .setPositiveButton(R.string.enter, new DialogInterface.OnClickListener() {
+                    @Override
+                    public void onClick(DialogInterface dialog, int idDialog) {
+                        String name= meno.getText().toString();
+                        String surname = priezvisko.getText().toString();
+                        String idEmp = id.getText().toString();
+                        Intent results = new Intent(MainActivity_tono.this, Vysledkyvyhladavania.class);
+                        results.putExtra("name", name);
+                        results.putExtra("surname", surname);
+                        results.putExtra("idEmp", idEmp);
+                        startActivity(results);
+                        Log.d("Dialog", name + " " + surname + " "+ idEmp);
+
+                    }
+                })
+                .setNegativeButton(R.string.clear, new DialogInterface.OnClickListener() {
+                    public void onClick(DialogInterface dialog, int id) {
+                        Log.d("Dialog", "nic ste nezadali");
+                    }
+                });
+
+        builder.create().show();
+
+    }
+
 }

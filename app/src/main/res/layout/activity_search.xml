@@ -1,5 +1,5 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<LinearLayout  xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
@@ -8,107 +8,118 @@
     android:paddingRight="@dimen/activity_horizontal_margin"
     android:paddingTop="@dimen/activity_vertical_margin"
     android:orientation="vertical"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     tools:context="sk.halmi.sittingorder.VyhladajZamestnanca">
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <TextView
-            android:id="@+id/TVhladajPodla"
-            android:text="@string/TV_textHladajPodla"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content" />
-    </LinearLayout>
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <TextView
-            android:id="@+id/TVmeno"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/TV_textMeno" />
-        <EditText
-            android:id="@+id/ETmeno"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_toRightOf= "@+id/textW_meno"/>
-    </LinearLayout>
+    <!--<LinearLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content">-->
+        <!--<TextView-->
+            <!--android:id="@+id/TVhladajPodla"-->
+            <!--android:text="@string/TV_textHladajPodla"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content" />-->
+    <!--</LinearLayout>-->
+    <!--<LinearLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content">-->
+        <!--<TextView-->
+            <!--android:id="@+id/TVmeno"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="@string/TV_textMeno" />-->
+        <!--<EditText-->
+            <!--android:id="@+id/ETmeno"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_toRightOf= "@+id/textW_meno"/>-->
+    <!--</LinearLayout>-->
 
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <TextView
-            android:id="@+id/TVpriezvisko"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/TV_textPriezvisko" />
-        <EditText
-            android:id="@+id/ETpriezvisko"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_toRightOf= "@+id/textW_priezvisko"/>
-    </LinearLayout>
+    <!--<LinearLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content">-->
+        <!--<TextView-->
+            <!--android:id="@+id/TVpriezvisko"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="@string/TV_textPriezvisko" />-->
+        <!--<EditText-->
+            <!--android:id="@+id/ETpriezvisko"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_toRightOf= "@+id/textW_priezvisko"/>-->
+    <!--</LinearLayout>-->
 
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <TextView
-            android:id="@+id/TVid"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/TV_id" />
-        <EditText
-            android:id="@+id/ETid"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_toRightOf= "@+id/TVid"/>
-    </LinearLayout>
-
-
+    <!--<LinearLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content">-->
+        <!--<TextView-->
+            <!--android:id="@+id/TVid"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="@string/TV_id" />-->
+        <!--<EditText-->
+            <!--android:id="@+id/ETid"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_toRightOf= "@+id/TVid"/>-->
+    <!--</LinearLayout>-->
 
 
-    <LinearLayout
-        android:orientation="horizontal"
-        android:background="@android:drawable/bottom_bar"
-        android:paddingLeft="4.0dip"
-        android:paddingTop="5.0dip"
-        android:paddingRight="4.0dip"
-        android:paddingBottom="1.0dip"
-        android:layout_width="fill_parent" android:layout_height="wrap_content"
-        android:layout_below="@+id/TextView01">
-
-        <Button
-
-            android:layout_width="0.0dip" android:layout_height="fill_parent"
-            android:text="Zrus"
-            android:id="@+id/zrus"
-            android:layout_weight="1.0" />
-
-        <Button
-
-            android:layout_width="0.0dip" android:layout_height="fill_parent"
-            android:text="Potvrd"
-            android:id="@+id/enter"
-            android:layout_weight="1.0" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content">
-        <TextView
-            android:id="@+id/TVvysledok"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:text="@string/TV_textVysledok" />
-        <EditText
-            android:id="@+id/editText_vysledok"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_toRightOf= "@+id/edit_vysledok"/>
-    </LinearLayout>
 
 
+
+
+    <!--<LinearLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="wrap_content">-->
+        <!--<TextView-->
+            <!--android:id="@+id/TVvysledok"-->
+            <!--android:layout_width="wrap_content"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:text="@string/TV_textVysledok" />-->
+        <!--<EditText-->
+            <!--android:id="@+id/editText_vysledok"-->
+            <!--android:layout_width="match_parent"-->
+            <!--android:layout_height="wrap_content"-->
+            <!--android:layout_toRightOf= "@+id/edit_vysledok"/>-->
+    <!--</LinearLayout>-->
+
+<!--<LinearLayout-->
+    <!--android:layout_width="match_parent"-->
+    <!--android:layout_height="wrap_content"-->
+    <!--android:gravity="center"-->
+>
+    <!--<ImageButton-->
+        <!--android:layout_width="@dimen/row_height"-->
+        <!--android:layout_height="@dimen/row_height"-->
+        <!--android:id="@+id/btn_orange"-->
+        <!--android:background="@drawable/roundedbutton_green"-->
+        <!--android:src="@drawable/abc_btn_radio_to_on_mtrl_015"-->
+        <!--android:layout_alignParentTop="true"-->
+        <!--android:layout_toRightOf="@+id/btn_green"-->
+        <!--android:layout_toEndOf="@+id/btn_green"-->
+        <!--android:layout_marginLeft="@dimen/activity_horizontal_margin"/>-->
+
+    <!--<ImageButton-->
+        <!--android:layout_width="@dimen/row_height"-->
+        <!--android:layout_height="@dimen/row_height"-->
+        <!--android:id="@+id/btn_green"-->
+        <!--android:background="@drawable/roundedbutton_orgg"-->
+        <!--android:src="@android:drawable/stat_notify_error"-->
+        <!--android:layout_alignParentTop="true"-->
+        <!--android:layout_alignParentLeft="true"-->
+        <!--android:layout_alignParentStart="true"-->
+
+        <!--/>-->
+<!--</LinearLayout>-->
+
+    <Button
+        android:id="@+id/buttonAlert"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:text="Show Alert Box"
+        />
 
 </LinearLayout>
