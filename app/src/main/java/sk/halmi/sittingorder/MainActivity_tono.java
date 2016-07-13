@@ -16,6 +16,9 @@ import android.widget.Toast;
 
 import java.util.ArrayList;
 
+import sk.halmi.sittingorder.adapter.MiestnostAdapter_tono;
+import sk.halmi.sittingorder.api.model.Miestnost_tono;
+
 public class MainActivity_tono extends AppCompatActivity {
 
     Spinner poschodieSpinnner;

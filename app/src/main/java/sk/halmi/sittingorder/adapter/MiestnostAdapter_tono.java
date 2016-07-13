@@ -1,4 +1,4 @@
-package sk.halmi.sittingorder;
+package sk.halmi.sittingorder.adapter;
 
 import android.content.Context;
 import android.view.LayoutInflater;
@@ -8,6 +8,9 @@ import android.widget.ArrayAdapter;
 import android.widget.TextView;
 
 import java.util.ArrayList;
+
+import sk.halmi.sittingorder.api.model.Miestnost_tono;
+import sk.halmi.sittingorder.R;
 
 /**
  * Created by FPTSlovakia on 7/12/2016.

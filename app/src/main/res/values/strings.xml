@@ -7,4 +7,5 @@
     <string name="building_number">Building</string>
     <string name="floor_number">Floor</string>
     <string name="room_number">Room</string>
+    <string name="edit_room">Edituj miestnost</string>
 </resources>
