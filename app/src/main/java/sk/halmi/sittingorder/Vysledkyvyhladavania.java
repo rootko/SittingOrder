@@ -150,14 +150,12 @@ public class Vysledkyvyhladavania extends AppCompatActivity {
                     Toast.makeText(Vysledkyvyhladavania.this, " Clicked", Toast.LENGTH_SHORT).show();
 
                     Intent intent=new Intent(Vysledkyvyhladavania.this,Editujmiestnost.class);
-                    intent.putExtra("building",build );
-                    intent.putExtra("floor", floor);
-                    intent.putExtra("room", room);
-                    intent.putExtra("capacity", "4");
-                    startActivity(intent);
+                    intent.putExtra("building",item.getBudova() );
+                    intent.putExtra("floor", item.getPoschodie());
+                    intent.putExtra("room", item.getMiestnost());
 
+					Log.d("Search", item.getBudova() + ":" + item.getPoschodie() + ":" + item.getMiestnost() + ": cap not defined");
                     startActivity(intent);
-
                 }
             });
 

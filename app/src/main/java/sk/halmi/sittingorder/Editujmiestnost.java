@@ -30,10 +30,12 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import sk.halmi.sittingorder.api.BackendAPI;
 import sk.halmi.sittingorder.api.SittingOrder;
+import sk.halmi.sittingorder.api.model.Miestnost_tono;
 import sk.halmi.sittingorder.api.model.RowItem;
 import sk.halmi.sittingorder.api.model.RowItemEdituj;
 import sk.halmi.sittingorder.api.model.person.PersonSet;
 import sk.halmi.sittingorder.api.model.person.Result;
+import sk.halmi.sittingorder.api.model.room.RoomSet;
 
 public class Editujmiestnost extends AppCompatActivity {
 
@@ -70,7 +72,13 @@ public class Editujmiestnost extends AppCompatActivity {
 		building=intent.getStringExtra("building");
 		floor=intent.getStringExtra("floor");
 		room=intent.getStringExtra("room");
-		capacity=Integer.valueOf(intent.getStringExtra("capacity"));
+		if (null != intent.getStringExtra("capacity")) {
+			capacity=Integer.valueOf(intent.getStringExtra("capacity"));
+		} else {
+			capacity = -1;
+		}
+
+		Log.d("Search", building + ":" + floor + ":" + room + ":" + capacity);
 
 		TextView txt_b=(TextView)findViewById(R.id.txt_rb);
 		TextView txt_f=(TextView)findViewById(R.id.txt_rf);
@@ -79,10 +87,48 @@ public class Editujmiestnost extends AppCompatActivity {
 		txt_f.setText(floor);
 		txt_r.setText(room);
 
-		getDataFromBackend();
+		//undefined capacity - load from backend
+		if (capacity == -1) {
+			getCapacityAndContinue();
+		} else {
+			getDataFromBackend();
+		}
 		populateList();
 		populateOnClickList();
 		//saveList();
+
+	}
+
+	private void getCapacityAndContinue() {
+		SittingOrder client = BackendAPI.createService(SittingOrder.class);
+
+		String buildingFilter = "IdBuilding eq '" + building + "'";
+		String floorFilter = "IdFloor eq '" + floor + "'";
+		String roomFilter = "IdRoom eq '" + room + "'";
+		Call<RoomSet> call = client.getRooms(buildingFilter + " and " + floorFilter + " and " + roomFilter, "json");
+		call.enqueue(new Callback<RoomSet>() {
+			@Override
+			public void onResponse(Call<RoomSet> call, Response<RoomSet> response) {
+				Log.d("OkHttp", "onResponse");
+				if (response.isSuccessful()) {
+					RoomSet roomSet = response.body();
+					for (sk.halmi.sittingorder.api.model.room.Result result : roomSet.getD().getResults()) {
+						Log.d("Room", result.getIdBuilding() + " " + result.getIdFloor() + " " + result.getIdRoom() + " " + result.getCapacity());
+						capacity = result.getCapacity();
+					}
+					getDataFromBackend();
+				} else {
+					// error response, no access to resource?
+					Log.d("OkHttp", "--------- didn't work ---------" + response.message());
+				}
+			}
+
+			@Override
+			public void onFailure(Call<RoomSet> call, Throwable t) {
+				// something went completely south (like no internet connection)
+				Log.d("OkHttp", "onFailure");
+			}
+		});
 
 	}
 
