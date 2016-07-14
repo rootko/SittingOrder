@@ -6,46 +6,30 @@
     android:layout_height="wrap_content"
     android:background="@android:color/white">
 
-    <RelativeLayout
-        android:layout_width="wrap_content"
+    <EditText
+        android:id="@+id/idecko"
+        android:layout_width="@dimen/text_ID"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:id="@+id/relativeLayout2"
-        android:layout_gravity="center">
-        <EditText
-            android:id="@+id/idecko"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:hint="ID"
-            android:textSize="@dimen/text_velky"
-            android:inputType="textPersonName"
-            android:layout_weight="1">
-        </EditText>
-    </RelativeLayout>
+        android:hint="ID"
+        android:textSize="@dimen/text_velky"
+        android:inputType="number"
+        android:maxLength="5"
+        android:layout_weight="1">
+    </EditText>
 
-
-    <RelativeLayout
-        android:layout_width="wrap_content"
+    <EditText
+        android:id="@+id/name"
+        android:layout_width="@dimen/text_NAME"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:id="@+id/relativeLayout1"
-        android:layout_gravity="center">
-        <EditText
-            android:id="@+id/name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:hint="Name"
-            android:textSize="@dimen/text_velky"
-            android:inputType="textPersonName"
-            android:layout_weight="1">
-        </EditText>
-    </RelativeLayout>
+        android:hint="Name"
+        android:textSize="@dimen/text_velky"
+        android:inputType="textPersonName"
+        android:layout_weight="1">
+    </EditText>
 
     <EditText
         android:id="@+id/priezvisko"
-        android:layout_width="match_parent"
+        android:layout_width="@dimen/text_SURNAME"
         android:layout_height="wrap_content"
         android:inputType="textPersonName"
         android:hint="Surname"
@@ -60,13 +44,14 @@
     </EditText>
 
     <ImageButton
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="@dimen/row_height"
+        android:layout_height="@dimen/row_height"
+        android:scaleType="centerCrop"
         android:layout_gravity="center"
-        android:src="@drawable/userdelete"
+        android:src="@drawable/deletegigant"
         android:background="@android:color/white"
         android:id="@+id/btndelete"
-        android:tint="@color/colorAccent"
+        android:tint="@color/colorBlue"
         />
 
 </LinearLayout>
