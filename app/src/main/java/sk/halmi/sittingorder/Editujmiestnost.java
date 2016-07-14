@@ -5,6 +5,7 @@ import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -24,7 +25,15 @@ import java.util.List;
 
 import butterknife.Bind;
 import butterknife.ButterKnife;
+import retrofit2.Call;
+import retrofit2.Callback;
+import retrofit2.Response;
+import sk.halmi.sittingorder.api.BackendAPI;
+import sk.halmi.sittingorder.api.SittingOrder;
+import sk.halmi.sittingorder.api.model.RowItem;
 import sk.halmi.sittingorder.api.model.RowItemEdituj;
+import sk.halmi.sittingorder.api.model.person.PersonSet;
+import sk.halmi.sittingorder.api.model.person.Result;
 
 public class Editujmiestnost extends AppCompatActivity {
 
@@ -38,6 +47,7 @@ public class Editujmiestnost extends AppCompatActivity {
     String building;
     String floor;
     String room;
+	int capacity;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -45,58 +55,39 @@ public class Editujmiestnost extends AppCompatActivity {
         setContentView(R.layout.activity_editujmiestnost1);
         ButterKnife.bind(this);
 
-        intent=getIntent();
-        building=intent.getStringExtra("building");
-        floor=intent.getStringExtra("floor");
-        room=intent.getStringExtra("room");
-
-        TextView txt_b=(TextView)findViewById(R.id.txt_rb);
-        TextView txt_f=(TextView)findViewById(R.id.txt_rf);
-        TextView txt_r=(TextView)findViewById(R.id.txt_rr);
-        txt_b.setText(building);
-        txt_f.setText(floor);
-        txt_r.setText(room);
-
-
-
-//        listView=(ListView)findViewById(R.id.listView);
         findViewById(R.id.b_test).setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Toast.makeText(Editujmiestnost.this, "save", Toast.LENGTH_SHORT).show();
             }
         });
-
-//        //FLOATING BUTTON
-//        fab = (FloatingActionButton) findViewById(R.id.fab);
-//        fab.setOnClickListener(new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                Snackbar.make(view, "Replace with your own action", Snackbar.LENGTH_LONG)
-//                        .setAction("Action", null).show();
-//            }
-//        });
-
-        // -------------------------- NAPLNANIE LISTVIEWU -----------------------------------------------
-        zoznammien.add(new RowItemEdituj("1","Karol", "Kamo"));
-        zoznammien.add(new RowItemEdituj("2","Julius", "Kamo"));
-
-        // ---------------------------- KAPACITA -------------------------------------------------------
-
-        int velikost=zoznammien.size();
-        for (int j=0;j<20-velikost;j++)
-        {
-            zoznammien.add(new RowItemEdituj("","", ""));
-        }
-
-        populateList();
-        populateOnClickList();
-        //saveList();
-
-
     }
 
-//    //Kliknutie na floating button ULOZIT
+	@Override
+	protected void onStart() {
+		super.onStart();
+		intent=getIntent();
+		building=intent.getStringExtra("building");
+		floor=intent.getStringExtra("floor");
+		room=intent.getStringExtra("room");
+		capacity=Integer.valueOf(intent.getStringExtra("capacity"));
+
+		TextView txt_b=(TextView)findViewById(R.id.txt_rb);
+		TextView txt_f=(TextView)findViewById(R.id.txt_rf);
+		TextView txt_r=(TextView)findViewById(R.id.txt_rr);
+		txt_b.setText(building);
+		txt_f.setText(floor);
+		txt_r.setText(room);
+
+		getDataFromBackend();
+		populateList();
+		populateOnClickList();
+		//saveList();
+
+	}
+
+
+	//    //Kliknutie na floating button ULOZIT
 //    private void saveList()
 //    {
 //        fab.setOnClickListener(new View.OnClickListener() {
@@ -150,21 +141,9 @@ public class Editujmiestnost extends AppCompatActivity {
             wrapper.addView(itemView);
         }
         this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
-//        ArrayAdapter<RowItemEdituj> adapter = new ListViewAdapterRowItemEdituj();
-//        listView.setAdapter(adapter);
     }
 
-    private void populateOnClickList()
-    {
-//        listView.setOnItemClickListener(new AdapterView.OnItemClickListener()
-//                                        {
-//                                            @Override
-//                                            public void onItemClick(AdapterView<?> parent, final View view, int position, long id)
-//                                            {
-//                                                int pos=position+1;
-//                                                Toast.makeText(Editujmiestnost.this, Integer.toString(pos)+" Clicked", Toast.LENGTH_SHORT).show();}
-//                                        }
-//        );
+    private void populateOnClickList() {
     }
 
     public class ListViewAdapterRowItemEdituj extends ArrayAdapter<RowItemEdituj> {
@@ -213,4 +192,56 @@ public class Editujmiestnost extends AppCompatActivity {
             return itemView;
         }
     }
+
+	private void getDataFromBackend() {
+		String filter = "IdBuilding eq '"+building+"'";
+		filter += " and IdFloor eq '"+floor+"'";
+		filter += " and IdRoom eq '"+room+"'";
+		// Create a very simple REST adapter which points the GitHub API endpoint.
+		SittingOrder client = BackendAPI.createService(SittingOrder.class);
+
+		// Fetch the response via retrofit
+		Call<PersonSet> call = client.getPersons(filter, "json");
+		call.enqueue(new Callback<PersonSet>() {
+			@Override
+			public void onResponse(Call<PersonSet> call, Response<PersonSet> response) {
+				Log.d("OkHttp", "onResponse");
+				if (response.isSuccessful()) {
+					//get the results - in this case a PersonSet
+					PersonSet personSet = response.body();
+					zoznammien = new ArrayList<RowItemEdituj>();
+					//get throught the results
+					for (Result result : personSet.getD().getResults()) {
+						//log each one
+						Log.d("OkHttp", result.getFirstName() + " " + result.getLastName());
+						//and add it to the data set
+						zoznammien.add(new RowItemEdituj(result.getIdPerson() + "", result.getFirstName(), result.getLastName()));
+					}
+
+					//add empty places
+					if (zoznammien.size() < capacity) {
+						for (int i = 0; i <= capacity - zoznammien.size(); i++) {
+							zoznammien.add(new RowItemEdituj("", "", ""));
+						}
+					}
+
+					//when all items are processed, refresh the recycler view
+					populateList();
+				} else {
+					// error response, no access to resource?
+					Log.d("OkHttp", "--------- didn't work ---------" + response.message());
+				}
+			}
+
+			@Override
+			public void onFailure(Call<PersonSet> call, Throwable t) {
+				// something went completely south (like no internet connection)
+				Log.d("OkHttp", "onFailure");
+			}
+		});
+
+
+
+	}
+
 }
