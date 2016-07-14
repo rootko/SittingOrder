@@ -174,14 +174,6 @@ public class MainActivity_tono extends AppCompatActivity {
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
 		switch (item.getItemId()) {
-			case R.id.action_room_edit:
-				startActivity(new Intent(MainActivity_tono.this, Editujmiestnost.class));
-				break;
-
-//			case R.id.action_search_person:
-//				startActivity(new Intent(MainActivity_tono.this, VyhladajZamestnanca.class));
-//				break;
-//
 			case R.id.action_search_results:
 				startActivity(new Intent(MainActivity_tono.this, Vysledkyvyhladavania.class));
 				break;
