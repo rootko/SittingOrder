@@ -98,7 +98,7 @@ public class MainActivity_tono extends AppCompatActivity {
                             ArrayList<Miestnost_tono> data = new ArrayList<Miestnost_tono>();
                             for (Result result : roomSet.getD().getResults()) {
                                 Log.d("OkHttp", result.getIdBuilding() + " " + result.getIdFloor() + " " + result.getIdRoom());
-                                data.add(new Miestnost_tono(result.getIdRoom(),result.getIdFloor()));
+                                data.add(new Miestnost_tono(result.getIdRoom(),result.getIdFloor(),result.getOccupied(),result.getCapacity() + ""));
                             }
 
                             vytvorMiestnosti(data);

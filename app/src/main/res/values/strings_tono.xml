@@ -1,5 +1,5 @@
 <resources>
-    <string name="titlesearchroom">Vyhladaj miestnost</string>
+    <string name="titlesearchroom">Search room</string>
 
     <!--BUDOVY ARRAYS ARRAY VALUES-->
     <string-array name="budovaArray">
