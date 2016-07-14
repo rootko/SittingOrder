@@ -98,7 +98,7 @@ public class MainActivity_tono extends AppCompatActivity {
                             ArrayList<Miestnost_tono> data = new ArrayList<Miestnost_tono>();
                             for (Result result : roomSet.getD().getResults()) {
                                 Log.d("OkHttp", result.getIdBuilding() + " " + result.getIdFloor() + " " + result.getIdRoom());
-                                data.add(new Miestnost_tono(result.getIdRoom(),result.getIdFloor(),result.getOccupied(),result.getCapacity() + ""));
+                                data.add(new Miestnost_tono(result.getIdBuilding(), result.getIdFloor(), result.getIdRoom(), result.getOccupied(),result.getCapacity() + ""));
                             }
 
                             vytvorMiestnosti(data);
@@ -139,20 +139,22 @@ public class MainActivity_tono extends AppCompatActivity {
     }
 
 
-    private void vytvorMiestnosti(ArrayList<Miestnost_tono> miestnosti) {
-        // Construct the data source
-//        final ArrayList<Miestnost_tono> arrayOfUsers = new ArrayList<Miestnost_tono>();
-//        for (int i = 0; i < 10; i++) {
-//            arrayOfUsers.add(new Miestnost_tono("Miestnost:" + i, "Poschodie:" + i));
-//        }
-//// Create the adapter to convert the array to views
+    private void vytvorMiestnosti(final ArrayList<Miestnost_tono> miestnosti) {
+        // Create the adapter to convert the array to views
         MiestnostAdapter_tono adapter = new MiestnostAdapter_tono(this, miestnosti);
 
         zoznamMiestnosti.setOnItemClickListener(new AdapterView.OnItemClickListener() {
 
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                startActivity(new Intent(MainActivity_tono.this, Editujmiestnost.class));
+                Intent editIntent = new Intent(MainActivity_tono.this, Editujmiestnost.class);
+                Miestnost_tono miestnost = miestnosti.get(position);
+                editIntent.putExtra("building", miestnost.getBuilding());
+                editIntent.putExtra("floor", miestnost.getPoschodie());
+                editIntent.putExtra("room", miestnost.getCislo());
+                editIntent.putExtra("capacity", miestnost.getKapacita());
+                editIntent.putExtra("occupation", miestnost.getObsadenost());
+                startActivity(editIntent);
             }
         });
         // Attach the adapter to a ListView
