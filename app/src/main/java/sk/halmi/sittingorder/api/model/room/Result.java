@@ -17,6 +17,9 @@ public class Result {
     @SerializedName("IdBuilding")
     @Expose
     private String idBuilding;
+    @SerializedName("Occupied")
+    @Expose
+    private String Occupied;
     @SerializedName("IdFloor")
     @Expose
     private String idFloor;
@@ -156,4 +159,11 @@ public class Result {
         this.toPersonSet = toPersonSet;
     }
 
+	public String getOccupied() {
+		return Occupied;
+	}
+
+	public void setOccupied(String occupied) {
+		Occupied = occupied;
+	}
 }
