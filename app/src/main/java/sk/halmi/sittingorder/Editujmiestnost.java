@@ -34,6 +34,9 @@ public class Editujmiestnost extends AppCompatActivity {
     @Bind(R.id.list_wrapper)
     LinearLayout wrapper;
     Intent intent;
+    String building;
+    String floor;
+    String room;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -42,14 +45,13 @@ public class Editujmiestnost extends AppCompatActivity {
         ButterKnife.bind(this);
 
         intent=getIntent();
-        String building=intent.getStringExtra("building");
-        String floor=intent.getStringExtra("floor");
-        String room=intent.getStringExtra("room");
+        building=intent.getStringExtra("building");
+        floor=intent.getStringExtra("floor");
+        room=intent.getStringExtra("room");
 
         TextView txt_b=(TextView)findViewById(R.id.txt_rb);
         TextView txt_f=(TextView)findViewById(R.id.txt_rf);
         TextView txt_r=(TextView)findViewById(R.id.txt_rr);
-
         txt_b.setText(building);
         txt_f.setText(floor);
         txt_r.setText(room);
