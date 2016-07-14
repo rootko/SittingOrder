@@ -2,21 +2,18 @@ package sk.halmi.sittingorder;
 
 import android.content.Intent;
 import android.os.Bundle;
-import android.support.design.widget.FloatingActionButton;
-import android.support.design.widget.Snackbar;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
+import android.view.MotionEvent;
 import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
-import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
-import android.widget.Button;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
-import android.widget.ListView;
+import android.widget.ScrollView;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -30,12 +27,11 @@ import retrofit2.Callback;
 import retrofit2.Response;
 import sk.halmi.sittingorder.api.BackendAPI;
 import sk.halmi.sittingorder.api.SittingOrder;
-import sk.halmi.sittingorder.api.model.Miestnost_tono;
-import sk.halmi.sittingorder.api.model.RowItem;
 import sk.halmi.sittingorder.api.model.RowItemEdituj;
 import sk.halmi.sittingorder.api.model.person.PersonSet;
 import sk.halmi.sittingorder.api.model.person.Result;
 import sk.halmi.sittingorder.api.model.room.RoomSet;
+import sk.halmi.sittingorder.helper.Constants;
 
 public class Editujmiestnost extends AppCompatActivity {
 
@@ -45,6 +41,13 @@ public class Editujmiestnost extends AppCompatActivity {
 //    FloatingActionButton fab;
     @Bind(R.id.list_wrapper)
     LinearLayout wrapper;
+
+	@Bind(R.id.scrollView)
+	ScrollView scrollView;
+
+	@Bind(R.id.b_save)
+	ImageButton btnSave;
+
     Intent intent;
     String building;
     String floor;
@@ -57,10 +60,10 @@ public class Editujmiestnost extends AppCompatActivity {
         setContentView(R.layout.activity_editujmiestnost1);
         ButterKnife.bind(this);
 
-        findViewById(R.id.b_test).setOnClickListener(new View.OnClickListener() {
+        btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(Editujmiestnost.this, "save", Toast.LENGTH_SHORT).show();
+				Toast.makeText(Editujmiestnost.this, "save", Toast.LENGTH_SHORT).show();
             }
         });
     }
@@ -95,11 +98,45 @@ public class Editujmiestnost extends AppCompatActivity {
 		}
 		populateList();
 		populateOnClickList();
-		//saveList();
+		scrollView.setOnTouchListener(new View.OnTouchListener() {
+			@Override
+			public boolean onTouch(View v, MotionEvent event) {
+				if (event.getAction() == MotionEvent.ACTION_DOWN) {
+					mTouchPosition = event.getY();
+				}
+				if (event.getAction() == MotionEvent.ACTION_MOVE) {
+					mReleasePosition = event.getY();
 
+					if (Math.abs(mTouchPosition - mReleasePosition) > 100) {
+						if (mTouchPosition - mReleasePosition > 0) {
+							// user scroll down
+							Log.d("scroll", mTouchPosition - mReleasePosition + " scrolled down");
+							btnSave.setVisibility(View.INVISIBLE);
+							mTouchPosition = event.getY();
+						} else {
+							//user scroll up
+							Log.d("scroll", mTouchPosition - mReleasePosition + " scrolled up");
+							btnSave.setVisibility(View.VISIBLE);
+							mTouchPosition = event.getY();
+						}
+					}
+				}
+				return scrollView.onTouchEvent(event);
+			}
+		});
 	}
 
+	private float mTouchPosition;
+	private float mReleasePosition;
+
 	private void getCapacityAndContinue() {
+		if (Constants.DUMMY) {
+			capacity = 19;
+			getDataFromBackend();
+			return;
+
+		}
+
 		SittingOrder client = BackendAPI.createService(SittingOrder.class);
 
 		String buildingFilter = "IdBuilding eq '" + building + "'";
@@ -160,6 +197,7 @@ public class Editujmiestnost extends AppCompatActivity {
 //    }
 
     private void populateList() {
+		wrapper.removeAllViews();
         LayoutInflater layoutInflater = LayoutInflater.from(Editujmiestnost.this);
         Integer idenfier = 0;
         for (RowItemEdituj item : zoznammien) {
@@ -240,6 +278,15 @@ public class Editujmiestnost extends AppCompatActivity {
     }
 
 	private void getDataFromBackend() {
+		if (Constants.DUMMY) {
+			zoznammien = new ArrayList<RowItemEdituj>();
+			for (int i = 0; i < 13; i++) {
+				zoznammien.add(new RowItemEdituj("12", "Frenky", "Tester"));
+			}
+			populateList();
+			return;
+		}
+
 		String filter = "IdBuilding eq '"+building+"'";
 		filter += " and IdFloor eq '"+floor+"'";
 		filter += " and IdRoom eq '"+room+"'";

@@ -118,7 +118,7 @@
     </ScrollView>
 
     <ImageButton
-        android:id="@+id/b_test"
+        android:id="@+id/b_save"
         android:layout_width="@dimen/row_height"
         android:layout_height="@dimen/row_height"
         android:background="@drawable/roundedbutton_green"
