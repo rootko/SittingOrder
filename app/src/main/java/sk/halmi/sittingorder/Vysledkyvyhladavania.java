@@ -7,6 +7,7 @@ import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.widget.LinearLayout;
+import android.widget.ProgressBar;
 import android.widget.TextView;
 import android.widget.Toast;
 import java.util.ArrayList;
@@ -28,6 +29,9 @@ public class Vysledkyvyhladavania extends AppCompatActivity {
     @Bind(R.id.list_wrapper)
     LinearLayout wrapper;
 
+    @Bind(R.id.pbHeaderProgress)
+    ProgressBar progressBar;
+
     String name2Search, surname2Search, idEmp2Search;
 
     @Override
@@ -40,7 +44,10 @@ public class Vysledkyvyhladavania extends AppCompatActivity {
         name2Search = intent.getStringExtra("name");
         surname2Search = intent.getStringExtra("surname");
         idEmp2Search = intent.getStringExtra("idEmp");
+
+        progressBar.setVisibility(View.VISIBLE);
     }
+
 
     @Override
     protected void onStart() {
@@ -72,8 +79,10 @@ public class Vysledkyvyhladavania extends AppCompatActivity {
         // Fetch the response via retrofit
         Call<PersonSet> call = client.getPersons(filter, "json");
         call.enqueue(new Callback<PersonSet>() {
+
             @Override
             public void onResponse(Call<PersonSet> call, Response<PersonSet> response) {
+                progressBar.setVisibility(View.GONE);
                 Log.d("OkHttp", "onResponse");
                 if (response.isSuccessful()) {
                     //get the results - in this case a PersonSet
@@ -96,6 +105,7 @@ public class Vysledkyvyhladavania extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<PersonSet> call, Throwable t) {
+                progressBar.setVisibility(View.GONE);
                 // something went completely south (like no internet connection)
                 Log.d("OkHttp", "onFailure");
             }
@@ -143,6 +153,7 @@ public class Vysledkyvyhladavania extends AppCompatActivity {
             });
 
             wrapper.addView(itemView);
+
 
             // STARY KOD
 //        ArrayAdapter<RowItem> adapter = new ListViewAdapterRowItem();
