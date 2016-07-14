@@ -155,6 +155,7 @@ public class Vysledkyvyhladavania extends AppCompatActivity {
 
 					Log.d("Search", item.getBudova() + ":" + item.getPoschodie() + ":" + item.getMiestnost() + ": cap not defined");
                     startActivity(intent);
+					finish();
                 }
             });
 
