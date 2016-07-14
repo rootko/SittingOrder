@@ -149,6 +149,7 @@ public class Editujmiestnost extends AppCompatActivity {
 
             wrapper.addView(itemView);
         }
+        this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 //        ArrayAdapter<RowItemEdituj> adapter = new ListViewAdapterRowItemEdituj();
 //        listView.setAdapter(adapter);
     }
