@@ -29,6 +29,7 @@ public class Vysledkyvyhladavania extends AppCompatActivity {
     LinearLayout wrapper;
 
     String name2Search, surname2Search, idEmp2Search;
+    String build,floor,room;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -131,12 +132,22 @@ public class Vysledkyvyhladavania extends AppCompatActivity {
             ePoschodie.setText(item.getPoschodie());
             eMiestnost.setText(item.getMiestnost());
 
+            build=item.getBudova();
+            floor=item.getPoschodie();
+            room=item.getMiestnost();
+
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
                     Toast.makeText(Vysledkyvyhladavania.this, " Clicked", Toast.LENGTH_SHORT).show();
 
                     Intent intent=new Intent(Vysledkyvyhladavania.this,Editujmiestnost.class);
+                    intent.putExtra("building",build );
+                    intent.putExtra("floor", floor);
+                    intent.putExtra("room", room);
+                    startActivity(intent);
+
+
                     startActivity(intent);
 
                 }
