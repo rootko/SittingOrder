@@ -1,5 +1,6 @@
 package sk.halmi.sittingorder;
 
+import android.content.Context;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -7,6 +8,8 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.view.WindowManager;
+import android.view.inputmethod.InputMethodManager;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
@@ -128,6 +131,7 @@ public class Editujmiestnost extends AppCompatActivity {
 
             wrapper.addView(itemView);
         }
+        this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
 //        ArrayAdapter<RowItemEdituj> adapter = new ListViewAdapterRowItemEdituj();
 //        listView.setAdapter(adapter);
     }
