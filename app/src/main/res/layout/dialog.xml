@@ -11,12 +11,14 @@
             android:id="@+id/TVmeno"
             android:layout_width="100dp"
             android:layout_height="wrap_content"
-            android:text="@string/TV_textMeno" />
+            android:text="@string/TV_textMeno"
+            android:inputType="textPersonName"/>
         <EditText
             android:id="@+id/ETmeno"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_toRightOf= "@+id/textW_meno"/>
+            android:layout_toRightOf= "@+id/textW_meno"
+            android:inputType="textPersonName"/>
     </LinearLayout>
 
 
@@ -47,7 +49,10 @@
             android:id="@+id/ETid"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:layout_toRightOf= "@+id/TVid"/>
+            android:layout_toRightOf= "@+id/TVid"
+            android:inputType="number"
+            android:maxLength="5"
+            />
     </LinearLayout>
 
     <!--<LinearLayout-->

@@ -30,7 +30,7 @@ public class Vysledkyvyhladavania extends AppCompatActivity {
     LinearLayout wrapper;
 
     @Bind(R.id.pbHeaderProgress)
-    ProgressBar progressBar;
+    TextView progressBar;
 
     String name2Search, surname2Search, idEmp2Search;
     String build,floor,room;
@@ -45,15 +45,14 @@ public class Vysledkyvyhladavania extends AppCompatActivity {
         name2Search = intent.getStringExtra("name");
         surname2Search = intent.getStringExtra("surname");
         idEmp2Search = intent.getStringExtra("idEmp");
-
-        progressBar.setVisibility(View.VISIBLE);
     }
 
 
     @Override
     protected void onStart() {
         super.onStart();
-        getDataFromBackend();
+		progressBar.setVisibility(View.VISIBLE);
+		getDataFromBackend();
     }
 
     private void getDataFromBackend() {
@@ -83,7 +82,6 @@ public class Vysledkyvyhladavania extends AppCompatActivity {
 
             @Override
             public void onResponse(Call<PersonSet> call, Response<PersonSet> response) {
-                progressBar.setVisibility(View.GONE);
                 Log.d("OkHttp", "onResponse");
                 if (response.isSuccessful()) {
                     //get the results - in this case a PersonSet
@@ -120,7 +118,7 @@ public class Vysledkyvyhladavania extends AppCompatActivity {
 		wrapper.removeAllViews();
         LayoutInflater layoutInflater = LayoutInflater.from(Vysledkyvyhladavania.this);
         Integer idenfier = 0;
-        for (RowItem item : vyhladavanie) {
+        for (final RowItem item : vyhladavanie) {
             //natiahni xml layout a vytvor objekt
             View itemView = layoutInflater.inflate(R.layout.rowitem, null);
             //priradime tag, aby sme ho vedeli volat neskor
@@ -155,8 +153,8 @@ public class Vysledkyvyhladavania extends AppCompatActivity {
                     intent.putExtra("building",build );
                     intent.putExtra("floor", floor);
                     intent.putExtra("room", room);
+                    intent.putExtra("capacity", "4");
                     startActivity(intent);
-
 
                     startActivity(intent);
 
@@ -186,6 +184,8 @@ public class Vysledkyvyhladavania extends AppCompatActivity {
 //                                        }
 //        );
         }
+		progressBar.setVisibility(View.GONE);
+
 //
 //    public class ListViewAdapterRowItem extends ArrayAdapter<RowItem> {
 //

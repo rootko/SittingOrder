@@ -31,14 +31,12 @@
     </ScrollView>
 
     <!--PROGRESS BAR-->
-    <ProgressBar
+    <TextView
         android:id="@+id/pbHeaderProgress"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:indeterminateOnly="true"
-        android:indeterminate="true"
-        >
-    </ProgressBar>
+        android:text="@string/loading"/>
+
 
 
 </RelativeLayout>
