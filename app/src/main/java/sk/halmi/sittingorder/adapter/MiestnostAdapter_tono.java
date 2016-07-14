@@ -33,7 +33,11 @@ public class MiestnostAdapter_tono extends ArrayAdapter<Miestnost_tono>{
         TextView tvObsadenost = (TextView) convertView.findViewById(R.id.obsadenost);
         // Populate the data into the template view using the data object
         tvMiestnost.setText(miestnost.getCislo());
-        tvObsadenost.setText(miestnost.getObsadenost()+"/"+miestnost.getKapacita());
+        if(!miestnost.getBuilding().equals("---")) {
+            tvObsadenost.setText(miestnost.getObsadenost() + "/" + miestnost.getKapacita());
+        } else {
+            tvObsadenost.setText("");
+        }
         // Return the completed view to render on screen
         return convertView;
     }

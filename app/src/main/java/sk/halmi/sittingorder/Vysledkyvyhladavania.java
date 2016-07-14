@@ -1,19 +1,12 @@
 package sk.halmi.sittingorder;
 
-import android.app.Activity;
 import android.content.Intent;
-import android.nfc.Tag;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
-import android.view.ViewGroup;
-import android.widget.AdapterView;
-import android.widget.ArrayAdapter;
-import android.widget.EditText;
 import android.widget.LinearLayout;
-import android.widget.ListView;
 import android.widget.TextView;
 import android.widget.Toast;
 import java.util.ArrayList;
@@ -26,14 +19,12 @@ import retrofit2.Response;
 import sk.halmi.sittingorder.api.BackendAPI;
 import sk.halmi.sittingorder.api.SittingOrder;
 import sk.halmi.sittingorder.api.model.RowItem;
-import sk.halmi.sittingorder.api.model.RowItemEdituj;
 import sk.halmi.sittingorder.api.model.person.PersonSet;
 import sk.halmi.sittingorder.api.model.person.Result;
 
 public class Vysledkyvyhladavania extends AppCompatActivity {
 
     private List<RowItem> vyhladavanie = new ArrayList<RowItem>();
-    //    ListView listView;
     @Bind(R.id.list_wrapper)
     LinearLayout wrapper;
 
@@ -49,16 +40,6 @@ public class Vysledkyvyhladavania extends AppCompatActivity {
         name2Search = intent.getStringExtra("name");
         surname2Search = intent.getStringExtra("surname");
         idEmp2Search = intent.getStringExtra("idEmp");
-
-        Toast.makeText(Vysledkyvyhladavania.this, name2Search + ": " + surname2Search + " " + idEmp2Search, Toast.LENGTH_SHORT).show();
-
-////        listView=(ListView)findViewById(R.id.listView);
-////        //------------------------------ NAPLNANIE LISTVIEWU ----------------------------------------------------
-//        for (int i = 0; i < 26; i++) {
-//            vyhladavanie.add(new RowItem("i", "Karol", "Kamo", "8", "4", "409"));
-//        }
-//        populateList();
-////        populateOnClickList();
     }
 
     @Override
@@ -71,10 +52,10 @@ public class Vysledkyvyhladavania extends AppCompatActivity {
         String filter = "";
         //http://54.169.86.172:8000/sap/opu/odata/SAP/ZSUMMER_SRV/PersonSet?$format=json&$filter=IdPerson eq 42 and FirstName eq 'Rudolf' and LastName eq 'Seman'
         if (null != name2Search && !"".equals(name2Search.toString())) {
-            filter += "FirstName eq '"+name2Search+"' ";
+            filter += "substringof('"+name2Search+"', FirstName)"; //"FirstName eq '"+name2Search+"' ";
         }
         if (null != surname2Search && !"".equals(surname2Search.toString())) {
-            filter += "and LastName eq '"+surname2Search+"' ";
+            filter += "and substringof('"+surname2Search+"', LastName)"; //"and LastName eq '"+surname2Search+"' ";
         }
         if (null != idEmp2Search && !"".equals(idEmp2Search.toString())) {
             filter += "and IdPerson eq "+idEmp2Search+" ";

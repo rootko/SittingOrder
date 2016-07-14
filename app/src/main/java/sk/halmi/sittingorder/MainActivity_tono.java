@@ -100,7 +100,10 @@ public class MainActivity_tono extends AppCompatActivity {
                                 Log.d("OkHttp", result.getIdBuilding() + " " + result.getIdFloor() + " " + result.getIdRoom());
                                 data.add(new Miestnost_tono(result.getIdBuilding(), result.getIdFloor(), result.getIdRoom(), result.getOccupied(),result.getCapacity() + ""));
                             }
-
+                            //add fake room if no results
+                            if(data.size() == 0){
+                                data.add(new Miestnost_tono("---", "", getString(R.string.no_results), "", ""));
+                            }
                             vytvorMiestnosti(data);
 
                         } else {
@@ -147,14 +150,16 @@ public class MainActivity_tono extends AppCompatActivity {
 
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent editIntent = new Intent(MainActivity_tono.this, Editujmiestnost.class);
                 Miestnost_tono miestnost = miestnosti.get(position);
-                editIntent.putExtra("building", miestnost.getBuilding());
-                editIntent.putExtra("floor", miestnost.getPoschodie());
-                editIntent.putExtra("room", miestnost.getCislo());
-                editIntent.putExtra("capacity", miestnost.getKapacita());
-                editIntent.putExtra("occupation", miestnost.getObsadenost());
-                startActivity(editIntent);
+                if (!miestnost.getBuilding().equals("---")){
+                    Intent editIntent = new Intent(MainActivity_tono.this, Editujmiestnost.class);
+                    editIntent.putExtra("building", miestnost.getBuilding());
+                    editIntent.putExtra("floor", miestnost.getPoschodie());
+                    editIntent.putExtra("room", miestnost.getCislo());
+                    editIntent.putExtra("capacity", miestnost.getKapacita());
+                    editIntent.putExtra("occupation", miestnost.getObsadenost());
+                    startActivity(editIntent);
+                }
             }
         });
         // Attach the adapter to a ListView
@@ -174,14 +179,6 @@ public class MainActivity_tono extends AppCompatActivity {
         // automatically handle clicks on the Home/Up button, so long
         // as you specify a parent activity in AndroidManifest.xml.
 		switch (item.getItemId()) {
-			case R.id.action_room_edit:
-				startActivity(new Intent(MainActivity_tono.this, Editujmiestnost.class));
-				break;
-
-//			case R.id.action_search_person:
-//				startActivity(new Intent(MainActivity_tono.this, VyhladajZamestnanca.class));
-//				break;
-//
 			case R.id.action_search_results:
 				startActivity(new Intent(MainActivity_tono.this, Vysledkyvyhladavania.class));
 				break;
