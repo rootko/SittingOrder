@@ -1,5 +1,6 @@
 package sk.halmi.sittingorder;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.design.widget.FloatingActionButton;
 import android.support.design.widget.Snackbar;
@@ -14,6 +15,7 @@ import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.ListView;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import java.util.ArrayList;
@@ -31,12 +33,28 @@ public class Editujmiestnost extends AppCompatActivity {
 //    FloatingActionButton fab;
     @Bind(R.id.list_wrapper)
     LinearLayout wrapper;
+    Intent intent;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_editujmiestnost1);
         ButterKnife.bind(this);
+
+        intent=getIntent();
+        String building=intent.getStringExtra("building");
+        String floor=intent.getStringExtra("floor");
+        String room=intent.getStringExtra("room");
+
+        TextView txt_b=(TextView)findViewById(R.id.txt_rb);
+        TextView txt_f=(TextView)findViewById(R.id.txt_rf);
+        TextView txt_r=(TextView)findViewById(R.id.txt_rr);
+
+        txt_b.setText(building);
+        txt_f.setText(floor);
+        txt_r.setText(room);
+
+
 
 //        listView=(ListView)findViewById(R.id.listView);
         findViewById(R.id.b_test).setOnClickListener(new View.OnClickListener() {
