@@ -13,107 +13,79 @@
         android:layout_gravity="center"
         android:src="@drawable/man"
         android:tint="@color/colorBlue"
-        android:id="@+id/image"/>
+        android:id="@+id/image"
+        android:layout_marginRight="15dp"/>
 
-
-
-<RelativeLayout
-    android:layout_width="match_parent"
-    android:layout_height="wrap_content"
-    android:layout_toRightOf="@+id/image"
-    android:layout_toEndOf="@+id/image">
-    <RelativeLayout
-        android:layout_width="wrap_content"
+    <LinearLayout
+        android:id="@+id/first_row"
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:id="@+id/relativeLayout2">
+        android:orientation="horizontal"
+        android:layout_toRightOf="@+id/image"
+        >
+
         <TextView
             android:id="@+id/idecko"
-            android:layout_width="wrap_content"
+            android:layout_width="0px"
             android:layout_height="wrap_content"
-
-            android:textSize="21dp"
-            android:layout_weight="1">
-        </TextView>
-    </RelativeLayout>
-
-
-    <RelativeLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_toRightOf="@+id/relativeLayout2"
-        android:layout_toEndOf="@+id/relativeLayout2"
-        android:layout_marginRight="@dimen/activity_horizontal_margin"
-        android:layout_marginLeft="@dimen/activity_horizontal_margin"
-        android:id="@+id/relativeLayout1">
-        <TextView
-            android:id="@+id/name"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-
-            android:textSize="21dp"
-            android:layout_weight="1">
-        </TextView>
-    </RelativeLayout>
-
-    <TextView
-        android:id="@+id/priezvisko"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-
-        android:textSize="@dimen/text_velky"
-        android:layout_weight="1"
-        android:layout_toRightOf="@+id/relativeLayout1"
-        android:layout_toEndOf="@+id/relativeLayout1"
-        android:layout_marginRight="@dimen/activity_horizontal_margin"
-        android:layout_marginLeft="@dimen/activity_horizontal_margin"
-        >
-    </TextView>
-
-    <RelativeLayout
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_below="@+id/relativeLayout1"
-        android:layout_alignParentLeft="true"
-        android:layout_alignParentStart="true"
-        android:id="@+id/relativeLayout">
-        <TextView
-            android:id="@+id/budova"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginRight="@dimen/activity_horizontal_margin"
-            android:layout_marginLeft="@dimen/activity_horizontal_margin"
+            android:text="i012"
+            android:layout_weight="0.5"
+            android:textAppearance="@android:style/TextAppearance.Medium"
             >
         </TextView>
 
-    </RelativeLayout>
+        <TextView
+            android:id="@+id/name"
+            android:layout_width="0px"
+            android:layout_height="wrap_content"
+            android:text="Meno"
+            android:textAppearance="@android:style/TextAppearance.Medium"
+            android:layout_weight="1">
+        </TextView>
 
-    <TextView
-        android:id="@+id/poschodie"
-        android:layout_width="wrap_content"
+        <TextView
+            android:id="@+id/priezvisko"
+            android:layout_width="0px"
+            android:layout_height="wrap_content"
+            android:text="Priezvisko"
+            android:layout_weight="1"
+            android:textAppearance="@android:style/TextAppearance.Medium"
+            >
+        </TextView>
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
         android:layout_height="wrap_content"
+        android:orientation="horizontal"
+        android:layout_toRightOf="@+id/image"
+        android:layout_below="@+id/first_row"
+        >
+        <TextView
+            android:id="@+id/budova"
+            android:text="14"
+            android:maxLength="3"
+            android:layout_width="0px"
+            android:layout_height="wrap_content"
+            android:layout_weight="0.5"/>
 
-        android:layout_below="@+id/relativeLayout1"
-        android:layout_toRightOf="@+id/relativeLayout"
-        android:layout_marginRight="@dimen/activity_horizontal_margin"
-        android:layout_marginLeft="@dimen/activity_horizontal_margin"
-        android:layout_toEndOf="@+id/relativeLayout">
-    </TextView>
+        <TextView
+            android:id="@+id/poschodie"
+            android:layout_width="0px"
+            android:layout_height="wrap_content"
+            android:text="14"
+            android:layout_weight="1"
+            />
 
-    <TextView
-        android:id="@+id/miestnost"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginRight="@dimen/activity_horizontal_margin"
-        android:layout_marginLeft="@dimen/activity_horizontal_margin"
-        android:layout_centerHorizontal="true"
-        android:layout_toRightOf="@+id/poschodie"
-        android:layout_toEndOf="@+id/poschodie"
-
-        android:layout_below="@+id/relativeLayout1">
-    </TextView>
-</RelativeLayout>
-
+        <TextView
+            android:id="@+id/miestnost"
+            android:text="502"
+            android:textAppearance="@android:style/TextAppearance.Small"
+            android:layout_width="0px"
+            android:layout_height="wrap_content"
+            android:layout_centerHorizontal="true"
+            android:layout_weight="1"
+            />
+    </LinearLayout>
 
 </RelativeLayout>

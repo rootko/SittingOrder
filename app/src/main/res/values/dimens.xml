@@ -10,4 +10,5 @@
     <dimen name="text_ID">40dp</dimen>
     <dimen name="text_NAME">80dp</dimen>
     <dimen name="text_SURNAME">100dp</dimen>
+    <dimen name="text_idecko">15dp</dimen>
 </resources>
