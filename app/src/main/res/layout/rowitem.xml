@@ -30,7 +30,7 @@
             android:id="@+id/idecko"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:hint="ID"
+
             android:textSize="21dp"
             android:layout_weight="1">
         </TextView>
@@ -49,7 +49,7 @@
             android:id="@+id/name"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:hint="Meno"
+
             android:textSize="21dp"
             android:layout_weight="1">
         </TextView>
@@ -59,7 +59,7 @@
         android:id="@+id/priezvisko"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:hint="Priezvisko"
+
         android:textSize="@dimen/text_velky"
         android:layout_weight="1"
         android:layout_toRightOf="@+id/relativeLayout1"
@@ -80,7 +80,6 @@
             android:id="@+id/budova"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:hint="budova"
             android:layout_marginRight="@dimen/activity_horizontal_margin"
             android:layout_marginLeft="@dimen/activity_horizontal_margin"
             >
@@ -92,7 +91,7 @@
         android:id="@+id/poschodie"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:hint="poschodie"
+
         android:layout_below="@+id/relativeLayout1"
         android:layout_toRightOf="@+id/relativeLayout"
         android:layout_marginRight="@dimen/activity_horizontal_margin"
@@ -104,7 +103,6 @@
         android:id="@+id/miestnost"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:hint="miestnost"
         android:layout_marginRight="@dimen/activity_horizontal_margin"
         android:layout_marginLeft="@dimen/activity_horizontal_margin"
         android:layout_centerHorizontal="true"
