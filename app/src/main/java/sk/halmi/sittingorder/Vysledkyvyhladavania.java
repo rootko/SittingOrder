@@ -147,7 +147,6 @@ public class Vysledkyvyhladavania extends AppCompatActivity {
             itemView.setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
-                    Toast.makeText(Vysledkyvyhladavania.this, " Clicked", Toast.LENGTH_SHORT).show();
 
                     Intent intent=new Intent(Vysledkyvyhladavania.this,Editujmiestnost.class);
                     intent.putExtra("building",item.getBudova() );
