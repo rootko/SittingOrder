@@ -172,7 +172,9 @@ public class MainActivity_tono extends AppCompatActivity {
                     editIntent.putExtra("capacity", miestnost.getKapacita());
                     editIntent.putExtra("occupation", miestnost.getObsadenost());
                     startActivity(editIntent);
-                }
+					MainActivity_tono.this.overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.slide_out_right);
+
+				}
             }
         });
         // Attach the adapter to a ListView
