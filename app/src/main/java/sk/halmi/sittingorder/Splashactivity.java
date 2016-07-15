@@ -43,6 +43,7 @@ public class Splashactivity extends AppCompatActivity {
                 // Start your app main activity
                 Intent i = new Intent(Splashactivity.this, MainActivity_tono.class);
                 startActivity(i);
+				Splashactivity.this.overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.slide_out_right);
                 finish();
             }
         }, SPLASH_TIME_OUT);

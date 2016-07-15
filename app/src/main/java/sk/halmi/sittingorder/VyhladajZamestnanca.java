@@ -98,6 +98,7 @@ public class VyhladajZamestnanca extends AppCompatActivity {
                         results.putExtra("surname", surname);
                         results.putExtra("idEmp", idEmp);
                         startActivity(results);
+                        VyhladajZamestnanca.this.overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.slide_out_right);
                         Log.d("Dialog", name + " " + surname + " "+ idEmp);
 
                     }

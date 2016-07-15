@@ -196,6 +196,7 @@ public class MainActivity_tono extends AppCompatActivity {
 		switch (item.getItemId()) {
 			case R.id.action_search_results:
 				startActivity(new Intent(MainActivity_tono.this, Vysledkyvyhladavania.class));
+                MainActivity_tono.this.overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.slide_out_right);
 				break;
 		}
 
@@ -232,6 +233,7 @@ public class MainActivity_tono extends AppCompatActivity {
                         results.putExtra("surname", surname);
                         results.putExtra("idEmp", idEmp);
                         startActivity(results);
+                        MainActivity_tono.this.overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.slide_out_right);
                         Log.d("Dialog", name + " " + surname + " "+ idEmp);
 
                     }
