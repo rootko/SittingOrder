@@ -19,7 +19,7 @@ import sk.halmi.sittingorder.api.model.person.PersonSet;
 import sk.halmi.sittingorder.api.model.person.Result;
 
 public class Splashactivity extends AppCompatActivity {
-	private static List<Result> people;
+	public static ArrayList<Result> PEOPLE = new ArrayList<>();
 
     // Splash screen timer
     private static int SPLASH_TIME_OUT = 2000;
@@ -63,9 +63,8 @@ public class Splashactivity extends AppCompatActivity {
 				if (response.isSuccessful()) {
 					//get the results - in this case a PersonSet
 					PersonSet personSet = response.body();
-					people = new ArrayList<Result>();
 					//get throught the results
-					people = personSet.getD().getResults();
+					PEOPLE = (ArrayList)personSet.getD().getResults();
 				} else {
 					// error response, no access to resource?
 					Log.d("OkHttp", "--------- didn't work ---------" + response.message());
@@ -78,5 +77,46 @@ public class Splashactivity extends AppCompatActivity {
 				Log.d("OkHttp", "onFailure");
 			}
 		});
+	}
+
+
+	public static String[] getIds() {
+		String[] ids = new String[PEOPLE.size()];
+		int position = 0;
+		for (Result person : PEOPLE) {
+			ids[position] = person.getIdPerson() + " [" + person.getFirstName() + " " + person.getLastName() + "]";
+			position++;
+		}
+		return ids;
+	}
+
+	public static String[] getNames() {
+		return getSurnames();
+//		ArrayList<String> names = new ArrayList<>();
+//		int position = 0;
+//		for (Result person : PEOPLE) {
+//			names.add(person.getFirstName() + " " + person.getLastName() + " [" + person.getIdPerson() + "]");
+//			position++;
+//		}
+//		return names.toArray(new String[0]);
+	}
+
+	public static String[] getSurnames() {
+		ArrayList<String> names = new ArrayList<>();
+		int position = 0;
+		for (Result person : PEOPLE) {
+			names.add(person.getLastName() + ", " + person.getFirstName() + " [" + person.getIdPerson() + "]");
+			position++;
+		}
+		return names.toArray(new String[0]);
+	}
+
+	public static Result getPerson(Integer idInt) {
+		for (Result person : PEOPLE) {
+			if (idInt.equals(person.getIdPerson())) {
+				return person;
+			}
+		}
+		return null;
 	}
 }

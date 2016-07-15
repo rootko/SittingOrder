@@ -3,6 +3,8 @@ package sk.halmi.sittingorder;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.text.Editable;
+import android.text.TextWatcher;
 import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.MotionEvent;
@@ -10,6 +12,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.view.WindowManager;
 import android.widget.ArrayAdapter;
+import android.widget.AutoCompleteTextView;
 import android.widget.EditText;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
@@ -30,6 +33,9 @@ import sk.halmi.sittingorder.api.SittingOrder;
 import sk.halmi.sittingorder.api.model.RowItemEdituj;
 import sk.halmi.sittingorder.api.model.person.PersonSet;
 import sk.halmi.sittingorder.api.model.person.Result;
+import sk.halmi.sittingorder.api.model.putperson.D;
+import sk.halmi.sittingorder.api.model.putperson.Person;
+import sk.halmi.sittingorder.api.model.putperson.PutPerson;
 import sk.halmi.sittingorder.api.model.room.RoomSet;
 import sk.halmi.sittingorder.helper.Constants;
 
@@ -37,6 +43,9 @@ public class Editujmiestnost extends AppCompatActivity {
 
     private List<RowItemEdituj> zoznammien = new ArrayList<RowItemEdituj>();
     List<RowItemEdituj> zmenamien = new ArrayList<RowItemEdituj>();
+	private ArrayList<Result> assignToRoom = new ArrayList<>();
+	private ArrayList<String> removeFromRoom = new ArrayList<>();
+
 //    ListView listView;
 //    FloatingActionButton fab;
     @Bind(R.id.list_wrapper)
@@ -63,7 +72,8 @@ public class Editujmiestnost extends AppCompatActivity {
         btnSave.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-				Toast.makeText(Editujmiestnost.this, "save", Toast.LENGTH_SHORT).show();
+				Log.d("save", "------------ ADD");
+				saveToDatabase();
             }
         });
     }
@@ -199,23 +209,158 @@ public class Editujmiestnost extends AppCompatActivity {
     private void populateList() {
 		wrapper.removeAllViews();
         LayoutInflater layoutInflater = LayoutInflater.from(Editujmiestnost.this);
-        Integer idenfier = 0;
+        Integer idenfier = 100;
         for (RowItemEdituj item : zoznammien) {
             //natiahni xml layout a vytvor objekt
-            View itemView = layoutInflater.inflate(R.layout.rowitem_edituj, null);
+            final View itemView = layoutInflater.inflate(R.layout.rowitem_edituj, null);
             //priradime tag, aby sme ho vedeli volat neskor
             itemView.setTag(idenfier);
 
             //najdeme v R.layout.rowitem_edituj vsetky polia, ktore plnime
-            final EditText eID = ((EditText)itemView.findViewById(R.id.idecko));
-            final EditText eName = ((EditText)itemView.findViewById(R.id.name));
-            final EditText eSurname = ((EditText)itemView.findViewById(R.id.priezvisko));
+            final AutoCompleteTextView eID = ((AutoCompleteTextView)itemView.findViewById(R.id.idecko));
+			//use autocomplete
+			String[] ids = Splashactivity.getIds();
+			ArrayAdapter<String> adapterID = new ArrayAdapter<String>(this,android.R.layout.simple_list_item_1, ids);
+			eID.setAdapter(adapterID);
+			eID.setThreshold(1);
+			eID.setTag(idenfier + 1);
+			eID.addTextChangedListener(new TextWatcher() {
+
+				@Override
+				public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+				}
+
+				@Override
+				public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+				}
+
+				@Override
+				public void afterTextChanged(Editable s) {
+					if (s.toString().contains("[")) {
+						String id = s.toString().substring(0, s.toString().indexOf('[')).trim();
+						Integer idInt = Integer.parseInt(id);
+						Result person = Splashactivity.getPerson(idInt);
+						eID.setText(idInt + "");
+						if (null != person) {
+							person.setIdBuilding(building);
+							person.setIdFloor(floor);
+							person.setIdRoom(room);
+
+							assignToRoom.add(person);
+							Log.d("TextChanged - id", idInt + "");
+							Integer tag = (Integer) eID.getTag();
+							AutoCompleteTextView name = (AutoCompleteTextView) itemView.findViewWithTag(tag + 1);
+							name.setText(person.getFirstName());
+							AutoCompleteTextView surname = (AutoCompleteTextView) itemView.findViewWithTag(tag + 2);
+							surname.setText(person.getLastName());
+						}
+					}
+				}
+			});
+
+
+			final AutoCompleteTextView eName = ((AutoCompleteTextView)itemView.findViewById(R.id.name));
+			String[] names = Splashactivity.getNames();
+			ArrayAdapter<String> adapterName = new ArrayAdapter<String>(this,R.layout.simple_list_item_search_help, names);
+			eName.setAdapter(adapterName);
+			eName.setThreshold(1);
+			eName.setTag(idenfier + 2);
+
+			eName.addTextChangedListener(new TextWatcher() {
+
+				@Override
+				public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+				}
+
+				@Override
+				public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+				}
+
+				@Override
+				public void afterTextChanged(Editable s) {
+					if (s.toString().contains("[")) {
+						Log.d("TextChanged - name", s.toString());
+						int start = s.toString().indexOf("[");
+						int end = s.toString().indexOf("]");
+						Integer idInt = Integer.parseInt(s.toString().substring(start + 1, end));
+						Result person = Splashactivity.getPerson(idInt);
+						eID.setText(idInt + "");
+						if (null != person) {
+							person.setIdBuilding(building);
+							person.setIdFloor(floor);
+							person.setIdRoom(room);
+
+							assignToRoom.add(person);
+							Integer tag = (Integer) eID.getTag();
+							AutoCompleteTextView name = (AutoCompleteTextView) itemView.findViewWithTag(tag + 1);
+							name.setText(person.getFirstName());
+							AutoCompleteTextView surname = (AutoCompleteTextView) itemView.findViewWithTag(tag + 2);
+							surname.setText(person.getLastName());
+						}
+					}
+				}
+			});
+
+            final AutoCompleteTextView eSurname = ((AutoCompleteTextView)itemView.findViewById(R.id.priezvisko));
+			String[] surnames = Splashactivity.getSurnames();
+			ArrayAdapter<String> adapterSurname = new ArrayAdapter<String>(this,R.layout.simple_list_item_search_help, surnames);
+			eSurname.setAdapter(adapterSurname);
+			eSurname.setThreshold(1);
+			eSurname.setTag(idenfier + 3);
+
+			eSurname.addTextChangedListener(new TextWatcher() {
+
+				@Override
+				public void onTextChanged(CharSequence s, int start, int before, int count) {
+
+				}
+
+				@Override
+				public void beforeTextChanged(CharSequence s, int start, int count, int after) {
+
+				}
+
+				@Override
+				public void afterTextChanged(Editable s) {
+					if (s.toString().contains("[")) {
+						Log.d("TextChanged - name", s.toString());
+						int start = s.toString().indexOf("[");
+						int end = s.toString().indexOf("]");
+						Integer idInt = Integer.parseInt(s.toString().substring(start + 1, end));
+						Result person = Splashactivity.getPerson(idInt);
+						eID.setText(idInt + "");
+						if (null != person) {
+							person.setIdBuilding(building);
+							person.setIdFloor(floor);
+							person.setIdRoom(room);
+
+							assignToRoom.add(person);
+							Integer tag = (Integer) eID.getTag();
+							AutoCompleteTextView name = (AutoCompleteTextView) itemView.findViewWithTag(tag + 1);
+							name.setText(person.getFirstName());
+							AutoCompleteTextView surname = (AutoCompleteTextView) itemView.findViewWithTag(tag + 2);
+							surname.setText(person.getLastName());
+						}
+
+					}
+				}
+			});
+
+
             eID.setText(item.getIdecko());
             eName.setText(item.getMeno());
             eSurname.setText(item.getPriezvisko());
+			itemView.findViewById(R.id.btndelete).setTag(idenfier + 4);
             itemView.findViewById(R.id.btndelete).setOnClickListener(new View.OnClickListener() {
                 @Override
                 public void onClick(View view) {
+					if (!removeFromRoom.contains(eID.getText().toString()) && !"".equals(eID.getText().toString())) {
+						removeFromRoom.add(eID.getText().toString());
+					}
                     eID.setText("");
                     eName.setText("");
                     eSurname.setText("");
@@ -223,6 +368,7 @@ public class Editujmiestnost extends AppCompatActivity {
             });
 
             wrapper.addView(itemView);
+			idenfier += 100;
         }
         this.getWindow().setSoftInputMode(WindowManager.LayoutParams.SOFT_INPUT_STATE_ALWAYS_HIDDEN);
     }
@@ -332,9 +478,59 @@ public class Editujmiestnost extends AppCompatActivity {
 				Log.d("OkHttp", "onFailure");
 			}
 		});
-
-
-
 	}
+
+	private void saveToDatabase() {
+		for (Result person : assignToRoom) {
+			Log.d("save", person.getIdPerson() + " " + person.getLastName() + " " + person.getFirstName());
+			putPerson(person);
+		}
+
+		Log.d("save", "------------ REMOVE");
+		for (String id : removeFromRoom) {
+			Log.d("save", id);
+			clearPerson(Integer.valueOf(id));
+		}
+
+		Toast.makeText(Editujmiestnost.this, "Saved!", Toast.LENGTH_SHORT).show();
+		finish();
+	}
+
+	private void clearPerson(Integer id) {
+		Result person = Splashactivity.getPerson(id);
+		person.setIdBuilding("");
+		person.setIdFloor("");
+		person.setIdRoom("");
+		putPerson(person);
+	}
+
+	private void putPerson(final Result person) {
+		// Create a very simple REST adapter which points the GitHub API endpoint.
+		SittingOrder client = BackendAPI.createService(SittingOrder.class);
+
+		Person putPerson = new Person();
+		putPerson.setFirstName(person.getFirstName());
+		putPerson.setLastName(person.getLastName());
+		putPerson.setIdPerson(person.getIdPerson());
+		putPerson.setIdBuilding(person.getIdBuilding());
+		putPerson.setIdFloor(person.getIdFloor());
+		putPerson.setIdRoom(person.getIdRoom());
+
+		// Fetch the response via retrofit
+		Call<Person> call = client.putPerson(putPerson);
+		call.enqueue(new Callback<Person>() {
+			@Override
+			public void onResponse(Call<Person> call, Response<Person> response) {
+				Log.d("OkHttp", "onResponse");
+			}
+
+			@Override
+			public void onFailure(Call<Person> call, Throwable t) {
+				// something went completely south (like no internet connection)
+				Log.d("OkHttp", "onFailure");
+			}
+		});
+	}
+
 
 }

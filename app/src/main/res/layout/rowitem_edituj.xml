@@ -6,7 +6,7 @@
     android:layout_height="wrap_content"
     android:background="@android:color/white">
 
-    <EditText
+    <AutoCompleteTextView
         android:id="@+id/idecko"
         android:layout_width="@dimen/text_ID"
         android:layout_height="wrap_content"
@@ -14,20 +14,20 @@
         android:textSize="@dimen/text_velky"
         android:inputType="number"
         android:maxLength="5"
-        android:layout_weight="1">
-    </EditText>
+        android:layout_weight="1"
+        android:dropDownWidth="match_parent" />
 
-    <EditText
+    <AutoCompleteTextView
         android:id="@+id/name"
         android:layout_width="@dimen/text_NAME"
         android:layout_height="wrap_content"
         android:hint="Name"
         android:textSize="@dimen/text_velky"
         android:inputType="textPersonName"
-        android:layout_weight="1">
-    </EditText>
+        android:layout_weight="1"
+        android:dropDownWidth="match_parent" />
 
-    <EditText
+    <AutoCompleteTextView
         android:id="@+id/priezvisko"
         android:layout_width="@dimen/text_SURNAME"
         android:layout_height="wrap_content"
@@ -40,8 +40,8 @@
         android:layout_toEndOf="@+id/relativeLayout1"
         android:layout_marginRight="@dimen/activity_horizontal_margin"
         android:layout_marginLeft="@dimen/activity_horizontal_margin"
-        >
-    </EditText>
+        android:dropDownWidth="match_parent"
+        />
 
     <ImageButton
         android:layout_width="@dimen/row_height"
