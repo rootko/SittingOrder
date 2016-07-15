@@ -66,6 +66,7 @@ public class SearchRecyclerViewAdapter extends RecyclerView.Adapter<SearchViewHo
 
 				Log.d("Search", mValues.get(position).getBudova() + ":" + mValues.get(position).getPoschodie() + ":" + mValues.get(position).getMiestnost() + ": cap not defined");
 				context.startActivity(intent);
+				((Activity)context).overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.slide_out_right);
 				((Activity)context).finish();
 
 			}
