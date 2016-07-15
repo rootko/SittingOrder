@@ -16,6 +16,7 @@ import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.EditText;
+import android.widget.GridView;
 import android.widget.ListView;
 import android.widget.Spinner;
 import android.widget.Toast;
@@ -31,13 +32,15 @@ import sk.halmi.sittingorder.adapter.MiestnostAdapter_tono;
 import sk.halmi.sittingorder.api.BackendAPI;
 import sk.halmi.sittingorder.api.SittingOrder;
 import sk.halmi.sittingorder.api.model.Miestnost_tono;
+import sk.halmi.sittingorder.api.model.RowItem;
 import sk.halmi.sittingorder.api.model.room.Result;
 import sk.halmi.sittingorder.api.model.room.RoomSet;
+import sk.halmi.sittingorder.helper.Constants;
 
 public class MainActivity_tono extends AppCompatActivity {
 
     Spinner poschodieSpinnner;
-    ListView zoznamMiestnosti;
+    GridView zoznamMiestnosti;
 
 
     @Override
@@ -79,7 +82,17 @@ public class MainActivity_tono extends AppCompatActivity {
         poschodieSpinnner.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
             @Override
             public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
-                SittingOrder client = BackendAPI.createService(SittingOrder.class);
+				if (Constants.DUMMY) {
+					ArrayList<Miestnost_tono> data = new ArrayList<Miestnost_tono>();
+					for (int i = 0; i < 13; i++) {
+						data.add(new Miestnost_tono("JT6", i + "", i + "01", 5 + "", 6 + ""));
+					}
+					vytvorMiestnosti(data);
+					return;
+				}
+
+
+				SittingOrder client = BackendAPI.createService(SittingOrder.class);
 
                 int index = budovaSpinner.getSelectedItemPosition();
                 int indexPoschodie = poschodieSpinnner.getSelectedItemPosition();
@@ -137,7 +150,7 @@ public class MainActivity_tono extends AppCompatActivity {
                 showSearchDialog();
             }
         });
-        zoznamMiestnosti = (ListView) findViewById(R.id.zoznamMiestnosti);
+        zoznamMiestnosti = (GridView) findViewById(R.id.zoznamMiestnosti);
 //        vytvorMiestnosti();
     }
 
@@ -159,7 +172,9 @@ public class MainActivity_tono extends AppCompatActivity {
                     editIntent.putExtra("capacity", miestnost.getKapacita());
                     editIntent.putExtra("occupation", miestnost.getObsadenost());
                     startActivity(editIntent);
-                }
+					MainActivity_tono.this.overridePendingTransition(android.R.anim.slide_in_left, android.R.anim.slide_out_right);
+
+				}
             }
         });
         // Attach the adapter to a ListView

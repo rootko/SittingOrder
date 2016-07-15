@@ -7,52 +7,55 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-        <TextView
-            android:id="@+id/TVmeno"
-            android:layout_width="100dp"
-            android:layout_height="wrap_content"
-            android:text="@string/TV_textMeno"
-            android:inputType="textPersonName"/>
-        <EditText
-            android:id="@+id/ETmeno"
+        <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_toRightOf= "@+id/textW_meno"
-            android:inputType="textPersonName"/>
+            android:layout_height="wrap_content">
+
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/ETmeno"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/TV_textMeno"
+                android:inputType="textCapWords"/>
+
+        </android.support.design.widget.TextInputLayout>
     </LinearLayout>
 
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-        <TextView
-            android:id="@+id/TVpriezvisko"
-            android:layout_width="100dp"
-            android:layout_height="wrap_content"
-            android:text="@string/TV_textPriezvisko" />
-        <EditText
-            android:id="@+id/ETpriezvisko"
+        <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_toRightOf= "@+id/textW_priezvisko"/>
+            android:layout_height="wrap_content">
+
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/ETpriezvisko"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/TV_textPriezvisko"
+                android:inputType="textCapWords"/>
+
+        </android.support.design.widget.TextInputLayout>
+
     </LinearLayout>
 
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content">
-        <TextView
-            android:id="@+id/TVid"
-            android:layout_width="100dp"
-            android:layout_height="wrap_content"
-            android:text="@string/TV_id" />
-        <EditText
-            android:id="@+id/ETid"
+        <android.support.design.widget.TextInputLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_toRightOf= "@+id/TVid"
-            android:inputType="number"
-            android:maxLength="5"
-            />
+            android:layout_height="wrap_content">
+
+            <android.support.design.widget.TextInputEditText
+                android:id="@+id/ETid"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:hint="@string/TV_id"
+                android:inputType="number"
+                android:maxLength="5"/>
+
+        </android.support.design.widget.TextInputLayout>
     </LinearLayout>
 
     <!--<LinearLayout-->
